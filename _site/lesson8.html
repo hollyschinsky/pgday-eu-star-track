@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>PhoneGap Day EU Workshop</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/styles.css" rel="stylesheet">
+
+
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-72845162-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body>
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">PhoneGap Day EU Essentials Workshop 2016</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a
+                        href="https://github.com/hollyschinsky/spotify-browser"><img
+                        src="images/icon-github.png" style="border: none;margin: -4px 0;height: 28px;width: 28px;"/>
+                    GitHub
+                    Project</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+
+
+<div class="container">
+
+<div class="row">
+
+    <div class="col-xs-12 col-sm-8">
+        <h1>Module 6&#58; Configuring Your App</h1>
+        <!--<hr/>-->
+        <h3 id="overview">Overview</h3>
+<p>You can configure your app with specific preferences and settings depending on the type of app you’re building. In this module we’ll look at some popular preferences and settings you should be aware of when building your apps.</p>
+
+<h4 id="common-preferences">Common Preferences</h4>
+<ol>
+  <li>DisallowOverscroll (iOS)</li>
+</ol>
+
+<p>By default the webview will have a bounce effect on iOS. You can see it when you try to drag down from the navigation bar, it will actually allow you to pull it down and snap back up when you stop:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;img class="screenshot-md" src="images/bounce.png"/&gt;
+</code></pre>
+</div>
+
+<p>Normally you would want your nav bar and toolbars to stay fixed though, so typically
+   you’ll want to disable this effect in your apps. Set this property to true in your config.xml:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;preference name="DisallowOverscroll" value="true" /&gt;
+</code></pre>
+</div>
+
+<blockquote>
+  <p>If you try to set this to false you will see the bounce effect but only when you’re running on an iOS
+  device directly outside of the PhoneGap Developer App since the PhoneGap Developer app has it configured
+  to true in the wrapper config.xml.</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>iOS Backup Storage (defaults to iCloud)</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;preference name="BackupWebStorage" value="none" /&gt;
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Orientation (iOS)</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>  &lt;preference name="Orientation" value="all" /&gt;
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Specifying intents to allow</p>
+    <ul>
+      <li>
+        <p><strong>ios</strong></p>
+
+        <div class="highlighter-rouge"><pre class="highlight"><code>&lt;allow-intent href="itms:*" /&gt;
+&lt;allow-intent href="itms-apps:*" /&gt;
+</code></pre>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>
+    <p><strong>android</strong></p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>   &lt;allow-intent href="market:*" /&gt;
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<blockquote>
+  <p>These settings are already included in your base template project so no action is required.</p>
+</blockquote>
+
+<ol>
+  <li>
+    <h4 id="content-security-policy">Content Security Policy</h4>
+    <ul>
+      <li>
+        <p>The CSP is used to help secure your app and mitigate injections and vulnerabilities like cross-site scripting (XSS). You can customize it to whitelist approved sites amongst other things. To use it you need to ensure you have the <a href="https://github.com/apache/cordova-plugin-whitelist">Cordova Whitelist Plugin</a> added to your project (already included in the base template by default) and add a meta tag to your index.html that declares the specific policy you want to apply for your app.</p>
+
+        <p><code class="highlighter-rouge">&lt;meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com</code> <code class="highlighter-rouge">https://api.spotify.com 'unsafe-eval' 'unsafe-inline' ws://localhost:3000; style-src 'self' 'unsafe-inline';</code> <code class="highlighter-rouge">media-src *; img-src * data:"&gt;</code></p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="content-security-policy-1">Content Security Policy</h4>
+<p>The CSP is used to help secure your app and mitigate injections and vulnerabilities like cross-site scripting (XSS). You can customize it to
+whitelist approved sites amongst other things. To use it you need to ensure you have the [Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist
+added to your project (already included in the base template by default) and add a meta tag to your index.html that declares the specific policy
+ you want to apply for your app.</p>
+
+<ol>
+  <li>
+    <p>Open the <code class="highlighter-rouge">index.html</code> file and add the following Content Security Policy meta tag. This will allow the access required for this particular app.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; script-src * 'unsafe-eval'; style-src 'self'; media-src *; frame-src *;  img-src * data:; connect-src * 'unsafe-eval'"&gt;
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>If you plan to run on the Android platform, you should also open the <code class="highlighter-rouge">config.xml</code> and add this line into the Android platform-specific section:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;allow-navigation href="http://*/*" /&gt;
+</code></pre>
+    </div>
+
+    <p>The end result looks like:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;platform name="android"&gt;
+         &lt;preference name="android-minSdkVersion" value="14" /&gt;
+         &lt;allow-intent href="market:*" /&gt;
+         &lt;allow-navigation href="http://*/*" /&gt;
+ &lt;/platform&gt;
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<p>To learn more about how to customize the CSP specifically, check out the <a href="http://cordova.apache.org/docs/en/latest/guide/appdev/whitelist/index.html">Cordova Whitelist Guide</a>
+  and <a href="https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy">Cordova Whitelist Plugin</a>.<br />
+ Also, you can get help generating your specific header to include in the meta tag more easily using this <a href="http://cspisawesome.com/">website</a>.</p>
+
+<ol>
+  <li>
+    <p>Icons and Splash screens</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>    &lt;platform name="ios"&gt;
+        &lt;icon height="180" src="res/icon/ios/icon-60@3x.png" width="180" /&gt;
+        &lt;icon height="60" src="res/icon/ios/icon-60.png" width="60" /&gt;
+        &lt;icon height="120" src="res/icon/ios/icon-60@2x.png" width="120" /&gt;      
+        ...
+    &lt;/platform&gt;
+    &lt;platform name="android"&gt;
+        &lt;preference name="android-minSdkVersion" value="14" /&gt;
+        &lt;icon density="ldpi" src="res/icon/android/ldpi/icon.png" /&gt;
+        &lt;icon density="mdpi" src="res/icon/android/mdpi/icon.png" /&gt;
+        ...
+    &lt;/platform&gt;
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<blockquote>
+  <p>These settings are already included in your base template project so no action is required.</p>
+</blockquote>
+
+<h4 id="general-icon-support">General Icon Support</h4>
+<ol>
+  <li>
+    <p>Copy the <code class="highlighter-rouge">icon.png</code> file from the final project <code class="highlighter-rouge">www</code> folder into your project <code class="highlighter-rouge">www</code> folder. This will be the general icon to be used for the app (on home screens) and is displayed
+in PhoneGap Desktop.</p>
+  </li>
+  <li>
+    <p>Now open the <code class="highlighter-rouge">config.xml</code> file and update the icon element to reference it. The current default from the template is <code class="highlighter-rouge">logo.png</code>. If it’s not there at all yet for some reason, add it just
+after the <code class="highlighter-rouge">&lt;content&gt;</code> element.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;icon src="www/icon.png" /&gt;
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<h3 id="bonus-platform-specific-icon-configuration">Bonus: Platform-Specific Icon Configuration</h3>
+<p>The above is fine while testing but when you’re ready to actually build and package your app for submission you’ll want to know how to
+configure all the different sizes needed specifically per platform. (This will vary depending on platform and version, use this as a general guideline
+and see the official iOS/Android/MS docs for the latest details.</p>
+
+<p>The Ionic Framework has a great service called <a href="http://blog.ionic.io/automating-icons-and-splash-screens/">Ionic Resources</a> to make this process easy. You need to provide an image for an icon
+with a size of 192x192 and another for the splash screen with a size of 2208x2208. Ionic provides Photoshop templates you can use as well.
+See <a href="http://blog.ionic.io/automating-icons-and-splash-screens/">this post</a> for more details on using their tool.</p>
+
+<ol>
+  <li>
+    <p>An icon and splash screen are included at the proper sizes in a <em>resources</em> folder in the project root starting with this module going forward. You can
+use them to run <code class="highlighter-rouge">ionic resources</code> and they will generate all the icons and splash screen file sizes for you and add them to the config.xml file.
+Once the CLI is used to do a build locally (for instance when you’re ready to move towards production), then
+these assets will all be copied down to their respective platform locations for you by having them included here.</p>
+
+    <p><strong>Note:</strong> If you’re using the Android platform, Ionic also includes the following two preferences to configure the splash screen.
+ Please see the <a href="https://github.com/apache/cordova-plugin-splashscreen">Cordova Splash Screen plugin</a> for more details.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;preference name="SplashScreen" value="screen"/&gt;
+ &lt;preference name="SplashScreenDelay" value="3000"/&gt;
+ &lt;preference name="FadeSplashScreenDuration" value="300" /&gt;
+</code></pre>
+    </div>
+
+    <blockquote>
+      <p>See the final app <code class="highlighter-rouge">config.xml</code> file <a href="https://github.com/hollyschinsky/spotify-browser/blob/master/config.xml">here</a> to see what icons and splash screens the tool adds into the config.xml
+ and all the different sizes supported.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="plugin-dependencies">Plugin Dependencies</h3>
+<p>At this point it’s worth going over all of the plugins this project relies on. You can add them into your config.xml so you have them
+when you decide to use the CLI to build locally and outside of the PhoneGap Developer app.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;plugin name="cordova-plugin-statusbar" spec="~1.0.1" /&gt;
+    &lt;plugin name="cordova-plugin-console" spec="~1.0.1" /&gt;
+    &lt;plugin name="cordova-plugin-whitelist" spec="~1.2.1" /&gt;
+    &lt;plugin name="cordova-plugin-media" spec="~2.1.0" /&gt;
+    &lt;plugin name="cordova-plugin-file" spec="~4.1.0" /&gt;
+    &lt;plugin name="cordova-plugin-splashscreen" spec="~3.1.0" /&gt;
+    &lt;plugin name="cordova-plugin-x-socialsharing" spec="~5.0.9" /&gt;
+</code></pre>
+</div>
+
+<div class="row" style="margin-top:40px;">
+<div class="col-sm-12">
+<a href="lesson5.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+<a href="lesson7.html" class="btn btn-default pull-right">Next <i class="glyphicon
+glyphicon-chevron-right"></i></a>
+</div>
+</div>
+
+
+
+        <!--<div class="row" style="margin-top: 30px;">-->
+            <!--<div class="col-xs-12">-->
+                <!--<div id="disqus_thread"></div>-->
+                <!--<script type="text/javascript">-->
+                    <!--/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */-->
+                    <!--var disqus_shortname = 'salesforcedeveloperworkshop'; // required: replace example with your forum shortname-->
+
+                    <!--/* * * DON'T EDIT BELOW THIS LINE * * */-->
+                    <!--(function() {-->
+                        <!--var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;-->
+                        <!--dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';-->
+                        <!--(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);-->
+                    <!--})();-->
+                <!--</script>-->
+                <!--<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>-->
+                <!--<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+    </div>
+
+    <div class="col-xs-12 col-sm-4 right-nav">
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading" style="font-variant:small-caps;font-size: 18px;">Modules</div>
+            <ol class="list-group">
+                <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
+                <li><a href="lesson2.html">App Structure Review</a></li>
+                <li><a href="lesson3.html">Local Storage/Offline Handling</a></li>
+                <li><a href="lesson4.html">Add Searchbar</a></li>
+                <li><a href="lesson5.html">Making Your App Feel Native</a></li>
+                <li><a href="lesson8.html">Add Swipeouts</a></li>
+                <li><a href="lesson7.html">Add Native Share Feature</a></li>
+                <li><a href="lesson6.html">Configuring Your App</a></li>
+                <li><a href="lesson10.html">Next Steps</a></li>
+            </ol>
+            <p></p>
+        </div>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-size="large"
+   data-url="http://hollyschinsky.github.io/phonegap-workshop"
+   data-text="PhoneGap Tutorial #Cordova #PhoneGap">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<a href="https://twitter.com/devgirlfl" class="twitter-follow-button" data-show-count="true"
+   data-size="large" data-lang="en">Follow
+    @devgirlfl</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="container">
+    <div id="footer">
+        <a href="http://devgirl.org"><p class="text-muted">Holly Schinsky</p></a>
+    </div>
+</div>
+
+
+<script src="lib/jquery.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

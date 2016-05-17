@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>PhoneGap Day EU Workshop</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/styles.css" rel="stylesheet">
+
+
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-72845162-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body>
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">PhoneGap Day EU Essentials Workshop 2016</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a
+                        href="https://github.com/hollyschinsky/spotify-browser"><img
+                        src="images/icon-github.png" style="border: none;margin: -4px 0;height: 28px;width: 28px;"/>
+                    GitHub
+                    Project</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+
+
+<div class="container">
+
+<div class="row">
+
+    <div class="col-xs-12 col-sm-8">
+        <h1>Module 2&#58; Create the App Structure</h1>
+        <!--<hr/>-->
+        <h2 id="overview">Overview</h2>
+<p>In this module you will learn how to set up your app structure, including the headers, main view, toolbars and Framework7 initialization code.
+Check out <a href="http://www.idangero.us/framework7/docs">the Framework7 website</a> docs and examples apps for more details.</p>
+
+<h3 id="framework7-views-and-pages">Framework7 Views and Pages</h3>
+<ol>
+  <li>
+    <p><strong>Views</strong> - The wrapper container for all visual views. Only one <code class="highlighter-rouge">views</code> element is allowed</p>
+  </li>
+  <li>
+    <p><strong>View</strong> - A separate visual part of app with its own settings, navigation and history. You must have a default view with class <code class="highlighter-rouge">view-main</code> since it’s
+the default where all pages are loaded into.</p>
+  </li>
+  <li>
+    <p><strong>Pages</strong> - A wrapper container for pages within a single view.</p>
+  </li>
+  <li>
+    <p><strong>Page</strong> - Similar to a web page, this is what we’re transitioning between. There can be many pages within a single view.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p>Based on the above terminology, in our Spotify Browser App we are using one View (stack of pages) and we navigate between these pages
+ by loading different templates into the main view container along with the required data to bind to that page so the expressions are
+ properly evaulated.</p>
+</blockquote>
+
+<p><img class="screenshot-lg" src="images/structure.png" /></p>
+
+<h3 id="steps">Steps</h3>
+
+<ol>
+  <li>
+    <p>Open <code class="highlighter-rouge">index.html</code> and give the app a dark theme by adding the F7 <code class="highlighter-rouge">layout-dark</code> class to the <code class="highlighter-rouge">&lt;body&gt;</code> tag:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;body class="layout-dark"&gt;
+</code></pre>
+    </div>
+
+    <blockquote>
+      <p>Refresh the app or open it if it’s running in your browser and check to see the change to the look of the app.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Next, we’ll define our main views and page. The main page will have a few form controls on it to help allow the user to enter search 
+criteria. Replace the block of code starting under the <code class="highlighter-rouge">&lt;!--Views--&gt;</code> comment and ending just before the cordova.js <code class="highlighter-rouge">&lt;script&gt;</code> include with:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;div class="views"&gt;
+     &lt;!-- Main view--&gt;
+     &lt;div class="view view-main"&gt;
+         &lt;!-- Top Navigation Bar--&gt;
+         &lt;div class="navbar" &gt;
+             &lt;div class="navbar-inner"&gt;
+                 &lt;!-- Home navbar --&gt;
+                 &lt;div class="left "&gt;
+                     &lt;!-- Left side navbar contains only icon --&gt;
+                     &lt;a href="#" class="link icon-only open-panel"&gt;
+                         &lt;i class="icon icon-bars"&gt;&lt;/i&gt;
+                     &lt;/a&gt;
+                 &lt;/div&gt;
+                 &lt;div class="center sliding"&gt;Spotify Browser&lt;/div&gt;
+             &lt;/div&gt;
+         &lt;/div&gt;
+
+         &lt;!-- Pages --&gt;
+         &lt;div class="pages navbar-through toolbar-through"&gt;
+             &lt;!-- Page, data-page contains page name--&gt;
+             &lt;div data-page="index" class="page"&gt;
+
+                 &lt;!-- Scrollable page content--&gt;
+                 &lt;div class="page-content"&gt;
+                     &lt;div class="content-block-title"&gt;Criteria&lt;/div&gt;
+                     &lt;div class="list-block"&gt;
+                         &lt;ul&gt;
+                             &lt;li&gt;
+                                 &lt;div class="item-content"&gt;
+                                     &lt;div class="item-media"&gt;&lt;i class="icon fa fa-music"&gt;&lt;/i&gt;&lt;/div&gt;
+                                     &lt;div class="item-inner"&gt;
+                                         &lt;div class="item-title label"&gt;Songs&lt;/div&gt;
+                                         &lt;div class="item-input"&gt;
+                                             &lt;input id="term" type="text" placeholder="Search for..." value=""/&gt;
+                                         &lt;/div&gt;
+                                     &lt;/div&gt;
+                                 &lt;/div&gt;
+                             &lt;/li&gt;
+
+                             &lt;li&gt;
+                                 &lt;div class="item-content"&gt;
+                                     &lt;div class="item-media"&gt;&lt;i class="icon fa fa-list-ol"&gt;&lt;/i&gt;&lt;/div&gt;
+                                     &lt;div class="item-inner"&gt;
+                                         &lt;div class="item-title label"&gt;Max Results&lt;/div&gt;
+                                         &lt;div class="item-input"&gt;
+                                             &lt;div class="range-slider"&gt;
+                                                 &lt;input id="numResults" type="range" min="0" max="50" value="20" step="1"/&gt;
+                                             &lt;/div&gt;
+                                         &lt;/div&gt;
+                                         &lt;div class="item-input rangeVal"&gt;
+                                             &lt;input id="sliderVal" type="text" disabled value="20"&gt;
+                                         &lt;/div&gt;
+                                     &lt;/div&gt;
+                                 &lt;/div&gt;
+                             &lt;/li&gt;
+                         &lt;/ul&gt;
+                     &lt;/div&gt;
+                     &lt;div class="content-block"&gt;
+                         &lt;div class="row"&gt;
+                             &lt;div class="col-100"&gt;
+                                 &lt;input id="btnSearch" type="button" value="Submit" class="button button-big button-fill color-green"/&gt;
+                             &lt;/div&gt;
+                         &lt;/div&gt;
+                     &lt;/div&gt;
+                 &lt;/div&gt;
+             &lt;/div&gt;
+         &lt;/div&gt;
+
+         &lt;!-- Bottom Toolbar on every view unless no-toolbar class specified (see item template)--&gt;
+         &lt;div class="toolbar"&gt;
+             &lt;div class="toolbar-inner"&gt;
+                 &lt;a href="http://www.spotify.com" class="link external"&gt;
+                     &lt;i class="icon icon-spotify"&gt;&lt;/i&gt;
+                     &lt;p class="color-white"&gt;&amp;nbsp;Spotify&lt;/p&gt;
+                 &lt;/a&gt;
+
+                 &lt;a href="http://www.idangero.us/framework7" class="link external"&gt;
+                     &lt;i class="icon icon-f7"&gt;&lt;/i&gt;
+                 &lt;/a&gt;
+             &lt;/div&gt;
+         &lt;/div&gt;
+     &lt;/div&gt;
+ &lt;/div&gt;
+</code></pre>
+    </div>
+  </li>
+  <li>This app uses a spotify icon in the toolbar (via the <code class="highlighter-rouge">icon-spotify</code> class below) that’s currently not defined and will not display 
+unless it’s added.
+    <ul>
+      <li>Copy the <code class="highlighter-rouge">spotify.png</code> file from the <code class="highlighter-rouge">www/img</code> folder in the final project and add it into the <code class="highlighter-rouge">www/img</code> folder of your working 
+project.</li>
+      <li>
+        <p>Now open your <code class="highlighter-rouge">styles.css</code> file in the <code class="highlighter-rouge">www/css</code> folder and add the style definition for it.</p>
+
+        <p><code class="highlighter-rouge">i.icon.icon-spotify {
+        width: 29px;
+        height: 29px;
+        background-image: url("../img/spotify.png");
+        margin-right: 3px;
+    }</code></p>
+      </li>
+    </ul>
+
+    <blockquote>
+      <p>Refresh your browser to see the new page. Notice the controls don’t actually do anything yet and if you try to drag the slider left/right it 
+will not update the value.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Now set up the Framework7 initialization code. Open <code class="highlighter-rouge">www/js/my-app.js</code> and replace the current Framework7 
+initialization code and <code class="highlighter-rouge">mainView</code> setup with the following code block, ending just before the <code class="highlighter-rouge">deviceready</code> event handler.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> var myApp = new Framework7({
+     precompileTemplates: true,
+     template7Pages: true,
+     modalTitle: "Spotify Browser"
+ })
+    
+ var $$ = Dom7;
+    
+ var mainView = myApp.addView('.view-main', {
+     dynamicNavbar: true,
+     domCache: true
+ });
+</code></pre>
+    </div>
+
+    <blockquote>
+      <p>The <em>modalTitle</em> is the default string to use for all alerts and modals in the application.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Next, while still in <code class="highlighter-rouge">my-app.js</code>, add the following change handler to update the slider text value. You can add the function just
+ before the <code class="highlighter-rouge">deviceready</code> event handler.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> $$(document).on('input change', 'input[type="range"]', function (e) {
+     $$('input#sliderVal').val(this.value);
+ })
+</code></pre>
+    </div>
+
+    <blockquote>
+      <p>Test to ensure the slider now updates the value before moving on to the next step.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Go ahead and remove the rest of the code in <code class="highlighter-rouge">my-app.js</code> after the <code class="highlighter-rouge">deviceready</code> handler since we will not be using anything with the <code class="highlighter-rouge">about.html</code>
+page. The final block of code in <code class="highlighter-rouge">my-app.js</code> should look like this at the end of this step:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> var myApp = new Framework7({
+     precompileTemplates: true,
+     template7Pages: true,
+     modalTitle: "Spotify Browser"
+ })
+    
+ var $$ = Dom7;
+    
+ var mainView = myApp.addView('.view-main', {
+     dynamicNavbar: true,
+     domCache: true
+ });
+            
+ $$(document).on('input change', 'input[type="range"]', function (e) {
+     $$('input#sliderVal').val(this.value);
+ })
+    
+ // Handle Cordova deviceready event
+ $$(document).on('deviceready', function() {
+     console.log("Device is ready!");
+ });
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>Ensure you see the application is shown and looks like what you see below:</p>
+
+    <p><img class="screenshot-lg-center" src="images/main2.png" /></p>
+  </li>
+</ol>
+
+<div class="row" style="margin-top:40px;">
+<div class="col-sm-12">
+<a href="module1.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+<a href="module3.html" class="btn btn-default pull-right">Next <i class="glyphicon
+glyphicon-chevron-right"></i></a>
+</div>
+</div>
+
+
+
+        <!--<div class="row" style="margin-top: 30px;">-->
+            <!--<div class="col-xs-12">-->
+                <!--<div id="disqus_thread"></div>-->
+                <!--<script type="text/javascript">-->
+                    <!--/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */-->
+                    <!--var disqus_shortname = 'salesforcedeveloperworkshop'; // required: replace example with your forum shortname-->
+
+                    <!--/* * * DON'T EDIT BELOW THIS LINE * * */-->
+                    <!--(function() {-->
+                        <!--var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;-->
+                        <!--dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';-->
+                        <!--(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);-->
+                    <!--})();-->
+                <!--</script>-->
+                <!--<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>-->
+                <!--<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+    </div>
+
+    <div class="col-xs-12 col-sm-4 right-nav">
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading" style="font-variant:small-caps;font-size: 18px;">Modules</div>
+            <ol class="list-group">
+                <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
+                <li><a href="lesson2.html">App Structure Review</a></li>
+                <li><a href="lesson3.html">Local Storage/Offline Handling</a></li>
+                <li><a href="lesson4.html">Add Searchbar</a></li>
+                <li><a href="lesson5.html">Making Your App Feel Native</a></li>
+                <li><a href="lesson8.html">Add Swipeouts</a></li>
+                <li><a href="lesson7.html">Add Native Share Feature</a></li>
+                <li><a href="lesson6.html">Configuring Your App</a></li>
+                <li><a href="lesson10.html">Next Steps</a></li>
+            </ol>
+            <p></p>
+        </div>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-size="large"
+   data-url="http://hollyschinsky.github.io/phonegap-workshop"
+   data-text="PhoneGap Tutorial #Cordova #PhoneGap">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<a href="https://twitter.com/devgirlfl" class="twitter-follow-button" data-show-count="true"
+   data-size="large" data-lang="en">Follow
+    @devgirlfl</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="container">
+    <div id="footer">
+        <a href="http://devgirl.org"><p class="text-muted">Holly Schinsky</p></a>
+    </div>
+</div>
+
+
+<script src="lib/jquery.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

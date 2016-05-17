@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>PhoneGap Day EU Workshop</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/styles.css" rel="stylesheet">
+
+
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-72845162-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body>
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">PhoneGap Day EU Essentials Workshop 2016</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a
+                        href="https://github.com/hollyschinsky/spotify-browser"><img
+                        src="images/icon-github.png" style="border: none;margin: -4px 0;height: 28px;width: 28px;"/>
+                    GitHub
+                    Project</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+
+
+<div class="container">
+
+<div class="row">
+
+    <div class="col-xs-12 col-sm-8">
+        <h1>Module 8&#58; Add Swipeout Handling</h1>
+        <!--<hr/>-->
+        <h3 id="overview">Overview</h3>
+<p>In this step we’ll add a common mobile UX feature to our app to make it more useful; swipeouts. Swipeouts
+allow you to swipe left or right over list elements to reveal further actions.</p>
+
+<p>The iOS Reminders app is a good example of an app using swipeouts:</p>
+
+<p><img class="screenshot-lg-center" src="images/remind2.png" /></p>
+
+<h2 id="steps">Steps</h2>
+<ol>
+  <li>Take a moment to review the <a href="http://framework7.io/docs/swipeout.html">Framework7 Swipeout Docs</a></li>
+  <li>Open <code class="highlighter-rouge">index.html</code> and add the <code class="highlighter-rouge">swipeout</code> class to the current <code class="highlighter-rouge">&lt;li&gt;</code> tag
+    <li class="swipeout">
+
+</li>
+  </li>
+  <li>
+    <p>Now add a new <code class="highlighter-rouge">&lt;div&gt;</code> element with the class of <code class="highlighter-rouge">swipeout-content</code> just below it the <code class="highlighter-rouge">&lt;li&gt;</code>
+and end it after the &lt;<code class="highlighter-rouge">li</code>&gt;</p>
+
+    <div class="swipeout-content">
+
+</div>
+  </li>
+  <li>
+    <p>Add the following snippet just before the closing <code class="highlighter-rouge">&lt;\li&gt;</code>. This code will create the action itself
+with a link containing a <code class="highlighter-rouge">share</code> class that we’ll list to for clicks and pass along the index of the
+item clicked. It also sets the share icon based on the platform.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>         &lt;!-- Swipeout actions right --&gt;                
+         &lt;div class="swipeout-actions-right"&gt;
+             &lt;!-- Swipeout actions links/buttons --&gt;
+             &lt;a href="#" class="share" data-item=""&gt;
+                
+                 &lt;i class="icon fa fa-share-alt fa-3x"&gt;&lt;/i&gt;&lt;/a&gt;
+                
+                 &lt;i class="icon fa fa-share fa-3x"&gt;&lt;/i&gt;&lt;/a&gt;
+                                      
+         &lt;/div&gt;
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p>In the above definition we have buttons in the <code class="highlighter-rouge">swipeout-actions-right</code> and <code class="highlighter-rouge">swipeout-actions-left</code> that require some handlers to invoke code to actually do something when clicked. In this
+step we will add the handling for them.</p>
+
+    <blockquote>
+      <p>The <code class="highlighter-rouge">data-item="{{@index}}"</code> syntax will pass the index of the item clicked on so we can then reference the right item in the code.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Add a Page Init handler to use for setting up events we want to handle on the list page specifically.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> myApp.onPageInit('list', function (page) {
+
+ });'
+</code></pre>
+    </div>
+  </li>
+  <li>
+    <p><strong>Add Favorites Handler</strong> - the <code class="highlighter-rouge">star</code> button indicates that the user can add this item as a favorite. Open <code class="highlighter-rouge">my-app.js</code> and add the following into the list page
+ init handler created in the previous step <code class="highlighter-rouge">myApp.onPageInit('list', function (page) {...</code></p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> $$(page.container).find('.favorite').on('click', function (e) {
+     var item = page.context[this.dataset.item]; //this.dataset.item returns data held in data-item attribute set in template
+     myApp.alert(item.name + ' added to favorites!');
+ });
+</code></pre>
+    </div>
+
+    <blockquote>
+      <p>Note the use of the <code class="highlighter-rouge">page.context[this.dataset.item];</code> As mentioned above, we passed the index of the current item clicked on the <code class="highlighter-rouge">data-item</code> attribute. Here
+we use it to retrieve that index from the page context. The page context is the array of results we received and supplied for the list template.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Add Preview Handler</strong> - the left swipeout <code class="highlighter-rouge">play</code> button indicates the user can click it to play a preview of this item. Open<code class="highlighter-rouge">my-app.js</code> and add the following into
+the list page init handler as well:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> $$(page.container).find('.preview').on('click', function (e) {
+     var item = page.context[this.dataset.item]; //this.dataset.item returns data held in data-item attribute set in template
+
+     myApp.alert("Previewing " + item.name);
+     var media = new Media(item.preview_url, function () {console.log("Media Success");},function (error)
+         {console.log("Media fail " + error)},null);
+     media.play();
+     setTimeout(function() {media.stop()},7000) //preview for 7 seconds
+ });
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<h3 id="dependencies">Dependencies</h3>
+<p>The preview feature above requires the Media Plugin. If you’re testing with the PhoneGap Developer app on your mobile device, then it’s already
+  configured for you in the sandboxed environment. If you’re running locally with the CLI however, be sure to add the plugin.</p>
+
+<ul>
+  <li>
+    <p><a href="https://github.com/apache/cordova-plugin-media">Media Plugin</a></p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>   $ phonegap plugin add cordova-plugin-media --save
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<blockquote>
+  <p>This command will also add the Cordova File Plugin by default since it’s a required dependency.</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>You may notice there’s also a <code class="highlighter-rouge">Share</code> swipeout button but we will be handling that in a later module since it requires a 3rd party plugin.</p>
+  </li>
+  <li>
+    <p>Run the app to make sure you see the click events firing when you tap on the Preview and Favorites buttons in the swipeouts.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p>Based on the F7 docs, the swipeout support will not work well in the browser so you should test this feature via the PhoneGap Developer App or the CLI locally.</p>
+</blockquote>
+
+<div class="row" style="margin-top:40px;">
+<div class="col-sm-12">
+<a href="lesson6.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+<a href="lesson9.html" class="btn btn-default pull-right">Next <i class="glyphicon
+glyphicon-chevron-right"></i></a>
+</div>
+</div>
+
+
+
+        <!--<div class="row" style="margin-top: 30px;">-->
+            <!--<div class="col-xs-12">-->
+                <!--<div id="disqus_thread"></div>-->
+                <!--<script type="text/javascript">-->
+                    <!--/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */-->
+                    <!--var disqus_shortname = 'salesforcedeveloperworkshop'; // required: replace example with your forum shortname-->
+
+                    <!--/* * * DON'T EDIT BELOW THIS LINE * * */-->
+                    <!--(function() {-->
+                        <!--var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;-->
+                        <!--dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';-->
+                        <!--(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);-->
+                    <!--})();-->
+                <!--</script>-->
+                <!--<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>-->
+                <!--<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+    </div>
+
+    <div class="col-xs-12 col-sm-4 right-nav">
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading" style="font-variant:small-caps;font-size: 18px;">Modules</div>
+            <ol class="list-group">
+                <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
+                <li><a href="lesson2.html">App Structure Review</a></li>
+                <li><a href="lesson3.html">Local Storage/Offline Handling</a></li>
+                <li><a href="lesson4.html">Add Searchbar</a></li>
+                <li><a href="lesson5.html">Making Your App Feel Native</a></li>
+                <li><a href="lesson8.html">Add Swipeouts</a></li>
+                <li><a href="lesson7.html">Add Native Share Feature</a></li>
+                <li><a href="lesson6.html">Configuring Your App</a></li>
+                <li><a href="lesson10.html">Next Steps</a></li>
+            </ol>
+            <p></p>
+        </div>
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-size="large"
+   data-url="http://hollyschinsky.github.io/phonegap-workshop"
+   data-text="PhoneGap Tutorial #Cordova #PhoneGap">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<a href="https://twitter.com/devgirlfl" class="twitter-follow-button" data-show-count="true"
+   data-size="large" data-lang="en">Follow
+    @devgirlfl</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="container">
+    <div id="footer">
+        <a href="http://devgirl.org"><p class="text-muted">Holly Schinsky</p></a>
+    </div>
+</div>
+
+
+<script src="lib/jquery.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
