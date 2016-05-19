@@ -68,138 +68,82 @@
 <div class="row">
 
     <div class="col-xs-12 col-sm-8">
-        <h1>Module 8&#58; Add Swipeout Handling</h1>
+        <h1>Module 6&#58; Add Native Share Feature</h1>
         <!--<hr/>-->
-        <h3 id="overview">Overview</h3>
-<p>In this step we’ll add a common mobile UX feature to our app to make it more useful; swipeouts. Swipeouts
-allow you to swipe left or right over list elements to reveal further actions.</p>
+        <p>In this module we’ll learn how to share a media item with a friend through messaging, email etc using the device’s native sharing features.</p>
 
-<p>The iOS Reminders app is a good example of an app using swipeouts:</p>
+<h4 id="ios">iOS</h4>
+<p><img class="screenshot-sm" src="images/share0.png" />
+<img class="screenshot-sm" src="images/share-ios.png" /></p>
 
-<p><img class="screenshot-lg-center" src="images/remind2.png" /></p>
+<h4 id="requirements">Requirements:</h4>
+<p>Before you can add code to support this feature, you’ll first need to add the [Social Sharing Plugin](https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin
+to your project since it is not yet used in the Star Track base app template.</p>
 
-<h2 id="steps">Steps</h2>
 <ol>
-  <li>Take a moment to review the <a href="http://framework7.io/docs/swipeout.html">Framework7 Swipeout Docs</a></li>
-  <li>Open <code class="highlighter-rouge">index.html</code> and add the <code class="highlighter-rouge">swipeout</code> class to the current <code class="highlighter-rouge">&lt;li&gt;</code> tag
-    <li class="swipeout">
-
-</li>
-  </li>
   <li>
-    <p>Now add a new <code class="highlighter-rouge">&lt;div&gt;</code> element with the class of <code class="highlighter-rouge">swipeout-content</code> just below it the <code class="highlighter-rouge">&lt;li&gt;</code>
-and end it after the &lt;<code class="highlighter-rouge">li</code>&gt;</p>
+    <p>Open your temrinal and use the PhoneGap CLI to add it now (the <code class="highlighter-rouge">--save</code> parameter will save the plugin to your <code class="highlighter-rouge">config.xml</code> file):</p>
 
-    <div class="swipeout-content">
-
-</div>
-  </li>
-  <li>
-    <p>Add the following snippet just before the closing <code class="highlighter-rouge">&lt;\li&gt;</code>. This code will create the action itself
-with a link containing a <code class="highlighter-rouge">share</code> class that we’ll list to for clicks and pass along the index of the
-item clicked. It also sets the share icon based on the platform.</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code>         &lt;!-- Swipeout actions right --&gt;                
-         &lt;div class="swipeout-actions-right"&gt;
-             &lt;!-- Swipeout actions links/buttons --&gt;
-             &lt;a href="#" class="share" data-item=""&gt;
-                
-                 &lt;i class="icon fa fa-share-alt fa-3x"&gt;&lt;/i&gt;&lt;/a&gt;
-                
-                 &lt;i class="icon fa fa-share fa-3x"&gt;&lt;/i&gt;&lt;/a&gt;
-                                      
-         &lt;/div&gt;
-</code></pre>
-    </div>
-  </li>
-  <li>
-    <p>In the above definition we have buttons in the <code class="highlighter-rouge">swipeout-actions-right</code> and <code class="highlighter-rouge">swipeout-actions-left</code> that require some handlers to invoke code to actually do something when clicked. In this
-step we will add the handling for them.</p>
-
-    <blockquote>
-      <p>The <code class="highlighter-rouge">data-item="{{@index}}"</code> syntax will pass the index of the item clicked on so we can then reference the right item in the code.</p>
-    </blockquote>
-  </li>
-  <li>
-    <p>Add a Page Init handler to use for setting up events we want to handle on the list page specifically.</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> myApp.onPageInit('list', function (page) {
-
- });'
-</code></pre>
-    </div>
-  </li>
-  <li>
-    <p><strong>Add Favorites Handler</strong> - the <code class="highlighter-rouge">star</code> button indicates that the user can add this item as a favorite. Open <code class="highlighter-rouge">my-app.js</code> and add the following into the list page
- init handler created in the previous step <code class="highlighter-rouge">myApp.onPageInit('list', function (page) {...</code></p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> $$(page.container).find('.favorite').on('click', function (e) {
-     var item = page.context[this.dataset.item]; //this.dataset.item returns data held in data-item attribute set in template
-     myApp.alert(item.name + ' added to favorites!');
- });
-</code></pre>
-    </div>
-
-    <blockquote>
-      <p>Note the use of the <code class="highlighter-rouge">page.context[this.dataset.item];</code> As mentioned above, we passed the index of the current item clicked on the <code class="highlighter-rouge">data-item</code> attribute. Here
-we use it to retrieve that index from the page context. The page context is the array of results we received and supplied for the list template.</p>
-    </blockquote>
-  </li>
-  <li>
-    <p><strong>Add Preview Handler</strong> - the left swipeout <code class="highlighter-rouge">play</code> button indicates the user can click it to play a preview of this item. Open<code class="highlighter-rouge">my-app.js</code> and add the following into
-the list page init handler as well:</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> $$(page.container).find('.preview').on('click', function (e) {
-     var item = page.context[this.dataset.item]; //this.dataset.item returns data held in data-item attribute set in template
-
-     myApp.alert("Previewing " + item.name);
-     var media = new Media(item.preview_url, function () {console.log("Media Success");},function (error)
-         {console.log("Media fail " + error)},null);
-     media.play();
-     setTimeout(function() {media.stop()},7000) //preview for 7 seconds
- });
+    <div class="highlighter-rouge"><pre class="highlight"><code>phonegap plugin add cordova-plugin-x-socialsharing --save
 </code></pre>
     </div>
   </li>
 </ol>
 
-<h3 id="dependencies">Dependencies</h3>
-<p>The preview feature above requires the Media Plugin. If you’re testing with the PhoneGap Developer app on your mobile device, then it’s already
-  configured for you in the sandboxed environment. If you’re running locally with the CLI however, be sure to add the plugin.</p>
-
-<ul>
-  <li>
-    <p><a href="https://github.com/apache/cordova-plugin-media">Media Plugin</a></p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code>   $ phonegap plugin add cordova-plugin-media --save
-</code></pre>
-    </div>
-  </li>
-</ul>
-
 <blockquote>
-  <p>This command will also add the Cordova File Plugin by default since it’s a required dependency.</p>
+  <p>Be sure to visit the <a href="https://github.com/apache/cordova-plugin-network-information">Social Sharing Plugin Docs</a> 
+to learn about any platform quirks and more things you can do with this plugin. This plugin and many other 
+great plugins were written by Eddy Verbruggen and can be found on his GitHub repo.</p>
 </blockquote>
 
+<h3 id="steps">Steps</h3>
+<p>Prior to this step we added a <code class="highlighter-rouge">swipeout</code> action to the results view with a share button though it doesn’t actually do anything yet. 
+In this module we’ll add event handling to this button to trigger the Social Sharing plugin functions.</p>
+
 <ol>
+  <li>Open <code class="highlighter-rouge">www/js/my-app.js</code> and locate the page init event handler for the <em>results</em> page (<code class="highlighter-rouge">myApp.onPageInit('results')...</code>).
+<br /></li>
   <li>
-    <p>You may notice there’s also a <code class="highlighter-rouge">Share</code> swipeout button but we will be handling that in a later module since it requires a 3rd party plugin.</p>
-  </li>
-  <li>
-    <p>Run the app to make sure you see the click events firing when you tap on the Preview and Favorites buttons in the swipeouts.</p>
+    <p>Add the following code to handle when a user clicks the <em>share</em> button on the swipeout. You can add it just after the  <code class="highlighter-rouge">searchbar</code> init handling:</p>
+
+    <p>$$(page.container).find(‘.share’).on(‘click’, function (e) {
+     var item = page.context.tracks.items[this.dataset.item]</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> if (window.plugins &amp;&amp; window.plugins.socialsharing) {
+     window.plugins.socialsharing.share("Hey! I found this on Spotify. It's called " + item.name + ", check it out!",
+         'Check this out', item.album.images[2].url, item.preview_url,
+         function () {
+             console.log("Share Success")
+         },
+         function (error) {
+             console.log("Share fail " + error)
+         });
+ }
+ else myApp.alert("Share plugin not found");  });
+</code></pre>
+    </div>
   </li>
 </ol>
 
+<h2 id="try-it">Try it!</h2>
+<p>Try out the button now to make sure you see the share features for your native device (or a message stating the plugin is 
+not supported). Remember, this is a 3rd party plugin so you can only test this feature if you’re running from the CLI locally.</p>
+
+<p>It should look something like below when you run it on iOS:</p>
+
+<p><img class="screenshot-sm" src="images/swipeout-ios.png" />
+  <img class="screenshot-sm" src="images/share0.png" />
+  <img class="screenshot-sm" src="images/share-ios.png" /></p>
+
 <blockquote>
-  <p>Based on the F7 docs, the swipeout support will not work well in the browser so you should test this feature via the PhoneGap Developer App or the CLI locally.</p>
+  <p>The options shown in the share menu will depend on your particular devices’ native sharing options.</p>
 </blockquote>
 
 <div class="row" style="margin-top:40px;">
-<div class="col-sm-12">
-<a href="lesson6.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
-<a href="lesson9.html" class="btn btn-default pull-right">Next <i class="glyphicon
-glyphicon-chevron-right"></i></a>
-</div>
+ <div class="col-sm-12">
+ <a href="lesson5.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+ <a href="lesson7.html" class="btn btn-default pull-right">Next <i class="glyphicon glyphicon-chevron-right"></i></a>
+ </div>
 </div>
 
 
@@ -233,14 +177,15 @@ glyphicon-chevron-right"></i></a>
             <div class="panel-heading" style="font-variant:small-caps;font-size: 18px;">Modules</div>
             <ol class="list-group">
                 <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
-                <li><a href="lesson2.html">App Structure Review</a></li>
-                <li><a href="lesson3.html">Local Storage/Offline Handling</a></li>
-                <li><a href="lesson4.html">Add Searchbar</a></li>
-                <li><a href="lesson5.html">Making Your App Feel Native</a></li>
-                <li><a href="lesson8.html">Add Swipeouts</a></li>
-                <li><a href="lesson7.html">Add Native Share Feature</a></li>
-                <li><a href="lesson6.html">Configuring Your App</a></li>
-                <li><a href="lesson10.html">Next Steps</a></li>
+                <li><a href="lesson2.html">App Walkthru</a></li>
+                <li><a href="lesson3.html">Detecting Offline</a></li>
+                <li><a href="lesson4.html">Searchbar Filter</a></li>
+                <li><a href="lesson5.html">Add Swipeout Action</a></li>
+                <li><a href="lesson6.html">Add Native Share Feature</a></li>
+                <li><a href="lesson7.html">Making Your App Feel Native</a></li>
+                <li><a href="lesson8.html">Configuring Your App</a></li>
+                <li><a href="lesson9.html">Next Steps</a></li>
+                <li><a href="lesson10.html">Optional: Remote Debugging</a></li>
             </ol>
             <p></p>
         </div>

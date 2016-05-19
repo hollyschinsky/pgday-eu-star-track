@@ -68,171 +68,67 @@
 <div class="row">
 
     <div class="col-xs-12 col-sm-8">
-        <h1>Module 5&#58; Making Your App Feel Native</h1>
+        <h1>Module 5&#58; Add Swipeout Handling</h1>
         <!--<hr/>-->
         <h3 id="overview">Overview</h3>
-<p>In this module we’re going to discuss ways to make your app feel and act native. Much of the tips included here are built into Framework7 so you
-will not need to implement them in this particular app but it’s important to be aware of them when building hybrid apps.</p>
+<p>In this step we’ll add a common mobile UX feature to our app to make it more useful; swipeouts. Swipeouts
+allow you to swipe left or right over list elements to reveal further actions.</p>
 
-<h2 id="css-tips-for-a-native-feel">CSS Tips for a Native Feel</h2>
+<p>The iOS Reminders app is a good example of an app using swipeouts:</p>
+
+<p><img class="screenshot-md2" src="images/remind2.png" /></p>
+
+<h2 id="steps">Steps</h2>
 <ol>
   <li>
-    <p>Remove tap highlight</p>
+    <p>Take a moment to review the <a href="http://framework7.io/docs/swipeout.html">Framework7 Swipeout Docs</a></p>
+  </li>
+  <li>
+    <p>Open <code class="highlighter-rouge">index.html</code> and add the <code class="highlighter-rouge">swipeout</code> class to the current <code class="highlighter-rouge">&lt;li&gt;</code> tag:</p>
 
-    <p><img class="screenshot-full" src="images/tap-highlight-issue.png" /></p>
+    <li class="swipeout">
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> -webkit-tap-highlight-color: rgba(0,0,0,0);
- -webkit-tap-highlight-color: transparent;
+</li>
+  </li>
+  <li>
+    <p>Now add a new <code class="highlighter-rouge">&lt;div&gt;</code> element with the class of <code class="highlighter-rouge">swipeout-content</code> just below it the <code class="highlighter-rouge">&lt;li&gt;</code>
+and end it after the &lt;<code class="highlighter-rouge">li</code>&gt;</p>
+
+    <div class="swipeout-content">
+
+</div>
+  </li>
+  <li>
+    <p>Add the following snippet just before the closing <code class="highlighter-rouge">&lt;\li&gt;</code>. This code will create the action itself
+with a link containing a <code class="highlighter-rouge">share</code> class that we’ll list to for clicks and pass along the index of the
+item clicked. It also sets the share icon based on the platform.</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>         &lt;!-- Swipeout actions right --&gt;                
+         &lt;div class="swipeout-actions-right"&gt;
+             &lt;!-- Swipeout actions links/buttons --&gt;
+             &lt;a href="#" class="share" data-item="{{@index}}"&gt;
+             {{#if @global.material}}
+                 &lt;i class="icon fa fa-share-alt fa-3x"&gt;&lt;/i&gt;&lt;/a&gt;
+             {{else}}
+                 &lt;i class="icon fa fa-share fa-3x"&gt;&lt;/i&gt;&lt;/a&gt;
+             {{/if}}                      
+         &lt;/div&gt;
 </code></pre>
     </div>
   </li>
   <li>
-    <p>Disable user selections on actionable elements (for instance a select on a long tap)</p>
+    <p>In the above definition we have an icon which acts as a button in the <code class="highlighter-rouge">swipeout-actions-right</code> 
+but it doesn’t actually do anything yet. It requires click handling code to invoke a <em>share</em> feature 
+that will be added in the next lesson.</p>
+  </li>
+  <li>
+    <p>Run your app to ensure you see the new swipeout action on the right side when you swipe on a list item.</p>
 
-    <p><img class="screenshot-full" src="images/text-select-issue.png" /></p>
-
-    <p>Fix with:</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> -webkit-user-select: none;		 
-</code></pre>
-    </div>
-
-    <p>Use the following <code class="highlighter-rouge">&lt;meta&gt;</code> tag in your <code class="highlighter-rouge">index.html</code> for Microsoft platform support:</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;meta name="msapplication-tap-highlight" content="no"&gt;
-</code></pre>
-    </div>
+    <p><img class="screenshot-lg-center" src="images/ios-swipeout.png" /></p>
 
     <blockquote>
-      <p>Keep <code class="highlighter-rouge">-webkit-user-select: text;</code> for text input fields or you won’t be able to edit your text.</p>
+      <p>IMPORTANT: Based on the Framework7 docs, the swipeout support will not work well in the browser so you should test this feature via the PhoneGap Developer App or the CLI locally.</p>
     </blockquote>
-  </li>
-  <li>
-    <p>Remove the glossy appearance from controls on iOS (gives flat design look)</p>
-
-    <p><img class="screenshot-full" src="images/glossy-appearance-issue.png" /></p>
-
-    <p>Fix it with:</p>
-
-    <p><code class="highlighter-rouge">-webkit-appearance: none;</code></p>
-  </li>
-  <li>
-    <p>Disable touch callout (default callout that displays when you hold down on a link)</p>
-
-    <p><img class="screenshot-full" src="images/callout-issue.png" /></p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> -webkit-touch-callout: none
-</code></pre>
-    </div>
-
-    <blockquote>
-      <p>See this article:<a href="http://phonegap-tips.com/articles/essential-phonegap-css-webkit-touch-callout.html">Touch callout disabled</a></p>
-    </blockquote>
-  </li>
-  <li>
-    <p>Use Native Scrolling - if the UI framework you’re using doesn’t have this set on the classes you’re using for your containers you should
- set it.</p>
-
-    <p><img class="screenshot-full" src="images/native-scroll-fix.png" /></p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> -webkit-overflow-scrolling: touch;
-</code></pre>
-    </div>
-
-    <blockquote>
-      <p>On Android 4+ every scrollable container has momentum scrolling.</p>
-    </blockquote>
-  </li>
-  <li>
-    <p>Use System Fonts</p>
-  </li>
-</ol>
-
-<ul>
-  <li>
-    <p>iOS: <code class="highlighter-rouge">font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;</code></p>
-  </li>
-  <li>
-    <p>Android: <code class="highlighter-rouge">font-family: 'RobotoRegular', 'Droid Sans', sans-serif;</code></p>
-  </li>
-  <li>
-    <p>Windows Phone: <code class="highlighter-rouge">font-family: 'Segoe UI', Segoe, Tahoma, Geneva, sans-serif;</code></p>
-  </li>
-</ul>
-
-<ol>
-  <li>Ensure you’re using FastClick or something similar to handle tap delay on mobile.</li>
-</ol>
-
-<blockquote>
-  <p>All of the tips in the above list are already built into Framework7 but important to understand when building hybrid apps.</p>
-</blockquote>
-
-<h4 id="optional">Optional</h4>
-<p>If you’re running an app through the CLI on a native simulator or device (outside of PhoneGap Developer), you can test out some of these CSS tricks
- using the Safari Developer tools while remote debugging on your iOS device or the Chrome Developer tools remote debugging your Android device.</p>
-
-<blockquote>
-  <p>See <a href="http://hollyschinsky.github.io/spotify-browser/module9.html">module 9</a> for remote debugging details</p>
-</blockquote>
-
-<p>Open up to inspect and modify some of the CSS properties applied from the Framework7 CSS.</p>
-
-<ol>
-  <li>Change tap highlight to a color instead of transparent, such as <code class="highlighter-rouge">-webkit-tap-highlight-color: green;</code>. Then try clicking on one of the external links at the bottom of the main screen.</li>
-  <li>Comment out <code class="highlighter-rouge">-webkit-touch-callout: none;</code> or change it to another value. Then hold down (long tap) on a link.</li>
-  <li>Comment out <code class="highlighter-rouge">-webkit-appearance: none;</code></li>
-  <li>While in the list view of the app, comment out the <code class="highlighter-rouge">-webkit-overflow-scrolling: touch;</code> property in the <code class="highlighter-rouge">.page-content</code> definition and notice the
- impact on the scrolling feel.</li>
-  <li>Try holding down on one of the titles, like the word Songs on the main view. You will see it get selected and a menu shown to copy etc. Deselect it,
-then add <code class="highlighter-rouge">-webkit-user-select: none;</code> to the <code class="highlighter-rouge">.body</code> definition in the CSS and try it again to see what happens.</li>
-</ol>
-
-<h2 id="performance-tips">Performance Tips</h2>
-
-<ol>
-  <li>
-    <p>Use Progressive Enhancement - check the <a href="">Can I Use</a> website</p>
-  </li>
-  <li>
-    <p>Serve properly sized images for all different resolutions. Resolution-independent images (SVG) are a great option and scale well.</p>
-  </li>
-  <li>
-    <p>Use Hardware Accelerated animations and view transitions (trick to force them to use the GPU - faster than CPU)</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> .page-on-left {
-     opacity: .9;
-     -webkit-transform: translate3d(-20%, 0, 0);
-     transform: translate3d(-20%, 0, 0)
- }
-
- .page-on-center .swipeback-page-shadow {
-     opacity: 1
- }
-
- .page-on-right {
-     -webkit-transform: translate3d(100%, 0, 0);
-     transform: translate3d(100%, 0, 0)
- }
-</code></pre>
-    </div>
-
-    <blockquote>
-      <p>The <a href="http://plugins.telerik.com/cordova/plugin/native-page-transitions">Native Transitions Plugin</a> is a Cordova plugin to help increase the speed of your transitions.  The plugin immediately grabs a screenshot
-of your webview (making a more lightweight view), then waits for the new content to load, and then performs the transition by animating out the
-screenshot and in the new view.</p>
-    </blockquote>
-  </li>
-  <li>
-    <p>Lazy load images and virtual lists (delay loading of images while outside of viewport until user scrolls to them)</p>
-
-    <p><img class="screenshot-full" src="images/lazy-load.png" /></p>
-  </li>
-  <li>
-    <p>HTML Caching (try to load pages from memory first)</p>
-  </li>
-  <li>
-    <p>Add the plugin to use the super fast WKWebView on iOS - <a href="http://devgirl.org/2016/01/11/a-faster-hybrid-app-for-the-new-year/">guide here</a></p>
   </li>
 </ol>
 
@@ -275,14 +171,15 @@ glyphicon-chevron-right"></i></a>
             <div class="panel-heading" style="font-variant:small-caps;font-size: 18px;">Modules</div>
             <ol class="list-group">
                 <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
-                <li><a href="lesson2.html">App Structure Review</a></li>
-                <li><a href="lesson3.html">Local Storage/Offline Handling</a></li>
-                <li><a href="lesson4.html">Add Searchbar</a></li>
-                <li><a href="lesson5.html">Making Your App Feel Native</a></li>
-                <li><a href="lesson8.html">Add Swipeouts</a></li>
-                <li><a href="lesson7.html">Add Native Share Feature</a></li>
-                <li><a href="lesson6.html">Configuring Your App</a></li>
-                <li><a href="lesson10.html">Next Steps</a></li>
+                <li><a href="lesson2.html">App Walkthru</a></li>
+                <li><a href="lesson3.html">Detecting Offline</a></li>
+                <li><a href="lesson4.html">Searchbar Filter</a></li>
+                <li><a href="lesson5.html">Add Swipeout Action</a></li>
+                <li><a href="lesson6.html">Add Native Share Feature</a></li>
+                <li><a href="lesson7.html">Making Your App Feel Native</a></li>
+                <li><a href="lesson8.html">Configuring Your App</a></li>
+                <li><a href="lesson9.html">Next Steps</a></li>
+                <li><a href="lesson10.html">Optional: Remote Debugging</a></li>
             </ol>
             <p></p>
         </div>

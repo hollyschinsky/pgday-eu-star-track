@@ -1,14 +1,14 @@
 ---
 layout: module
-title: Module 10&#58; Next Steps
+title: Module 10&#58; Performance Tips
 ---
 
-###Performance Tip: Serve Images at Desired Resolution
+### Performance Tip: Serve Images at Desired Resolution
 
-####Problem: 
+#### Problem: 
 Browsers have limited cache for resized images. Once full, scrolling up and down where old (no longer cached) images were used will cause them to have to be resized again on the fly resulting in a choppy experience.
 
-####Solution:
+#### Solution:
 Serve images at the resolution you want them to be displayed.
 
 Browsers have a limited cache for resized images. Once that cache fills up, older images get evacuated from the cache. This means that, as the user scrolls up and down the page, they will constantly run into images that are not in the cache. These images will have to be decoded and resized again on the fly.

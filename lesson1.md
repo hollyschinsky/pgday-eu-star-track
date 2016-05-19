@@ -1,27 +1,32 @@
 ---
 layout: module
-title: Module 1&#58; Project Setup/PhoneGap Tooling
+title: Module 1&#58; Project Setup
 ---
 
-### Download/Clone Final App and Solutions
-The final application source for the project we'll be building in this workshop is located  [http://github.com/hollyschinsky/pgday-eu-star-track](https://github.com/hollyschinsky/pgday-eu-star-track).
+## Retrieve the Final Solution App
+The final version of the project we'll be building in this workshop is located at [http://github.com/hollyschinsky/pgday-eu-star-track](https://github.com/hollyschinsky/pgday-eu-star-track).
+Before moving forward we'll create a local project with it for reference. 
 
+#### Steps
 1. Create a working directory named `pgday2016` on your hard drive
-2. `cd` into it and download the zip file for the [final project](https://github.com/hollyschinsky/pgday-eu-star-track/archive/master.zip)
-or clone it with git:
+2. From the command line, `cd` into it, then use the PhoneGap CLI with the following command to create a local version of the final project named `pgday-eu-star-track`
 
-         $ git clone https://github.com/hollyschinsky/pgday-eu-star-track
+        phonegap create pgday-eu-star-track --template https://github.com/hollyschinsky/pgday-eu-star-track
 
-2. At this point you should have something like this on your local hard drive with the final app project:
+   Alternatively you could use git to clone the project as well:
+    
+        git clone https://github.com/hollyschinsky/pgday-eu-star-track
 
-    ~/pgday2016/pgday-eu-star-track
+2. At this point you should have a folder called `pgday-eu-star-track` containing the copy of the final project in your working directory:
+
+        ~/pgday2016/pgday-eu-star-track
 
 >This final project can be used for reference in case you get stuck at any point in the workshop or simply want to
 follow along using it rather than code from your own version.
 
-### Create a new Project
+## Create a new Project
 In this step we'll be using the [PhoneGap CLI](https://www.npmjs.com/package/phonegap) to create a project based on an existing PhoneGap app template called **Star Track**. We'll work through lessons enhancing
-the base Star Track sample with some additional features. The final result should look like the project you copied in step 1 above.
+the base Star Track sample with some additional features. The final result should look like the project you retrieved in step 1 above.
 
 >IMPORTANT: If you have not installed the PhoneGap CLI yet or do not have version 6.2.3 or greater, please install it now from npm:
   `npm install -g phonegap`. PhoneGap CLI 6.2.2 had a bug that could interfere with certain parts of this workshop so please ensure you're not using
@@ -31,20 +36,25 @@ that version. To check simply run the command `phonegap -v`.
 
 2. Create a new PhoneGap project using the PhoneGap CLI and passing the name of the starter *Star Track* PhoneGap template.
 
-        $ phonegap create myStarTrack --template phonegap-app-star-track      
+        phonegap create myStarTrack --template phonegap-app-star-track      
 
     The above command will create a basic project with a default name and id. If you would like to specifically set the name and id, use the following command with your desired parameters:
 
-        $ phonegap create myStarTrack --template phonegap-app-star-track  --name "My Star Track" --id com.mycompany.startrack
+        phonegap create myStarTrack --template phonegap-app-star-track  --name "My Star Track" --id com.mycompany.startrack
 
 3. By the end of this step you should have two folders in your working directory:
 
-    - ~/pgday2016/pgday-eu-star-track - the final project for reference
-    - ~/pgday2016/myStarTrack         - the base star track app to enhance
+    - `~/pgday2016/pgday-eu-star-track` - the final project for reference
+    - `~/pgday2016/myStarTrack`         - the base star track app to enhance
 
-### Run the base app
-Before moving on, ensure your newly created app based on the template works ok since we will be building on this
-throughout the workshop. To try it out, choose from the following options:
+## Run the base app
+Before moving on, ensure your newly created Star Track app based on the template works since we will be building on this
+throughout the workshop. Below is what it looks like running on Android with material design, and at the end of this section
+are screenshots of what it looks like running on iOS.  
+    
+   <img class="screenshot-full" src="images/star-track-screens-android.jpg"/><br>
+
+To try it out, choose from the following options:
 
 - `Serve` your app and view it with the PhoneGap Developer App on a mobile device or in the browser (recommended approach).
 
@@ -75,21 +85,19 @@ throughout the workshop. To try it out, choose from the following options:
   >This option requires a mobile SDK setup. If you have Mac and Xcode you should be able to use iOS, but Android requires [additional SDK installation and setup](http://developer.android.com/sdk).
 
   **NOTE:** If you don't have the PhoneGap Developer App, you can still run the app in your browser by opening the `index.html` file in the browser, you will just have limited
-  functionality.    
+  functionality.
 
-- Spend a moment trying out the app, ensuring it looks like what you see below on iOS or Android respectively:
+- Spend a moment trying out the app, ensuring it looks like what you see below:
 
-<img class="screenshot-lg" src="images/star-track-screens-ios.jpg"/><br>
-<img class="screenshot-lg" src="images/star-track-screens-android.jpg"/>
+  <img class="screenshot-full" src="images/star-track-screens-ios.jpg"/><br>
 
+>You should use your browser developer tools at any time during this workshop to help debug any issues. In Chrome you can access them with **Alt+Cmd+I** or via the **View->Developer** menu.
 
->Use your browser developer tools at any time during this workshop to help debug any issues. In Chrome you can access them  with Alt+Cmd+I or via the View->Developer menu.
-
-#### PhoneGap Developer App Tips
+### PhoneGap Developer App Tips
 When viewing your apps with the PhoneGap Developer app, you should be aware of the following gestures:
 
-- Use a 4-finger tap to force your app to refresh (if Live reload seems too slow)
-- Use a 3 finger tap to go to the home screen
+- Use a *4 finger* tap to force your app to refresh
+- Use a *3 finger* tap to go to the home screen
 
 
 

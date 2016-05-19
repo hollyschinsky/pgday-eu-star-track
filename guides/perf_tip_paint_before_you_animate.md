@@ -1,9 +1,14 @@
-###Performance Tip: Paint before you animate
+---
+layout: module
+title: Module 10&#58; Performance Tips
+---
 
-####Problem: 
+### Performance Tip: Paint before you animate
+
+#### Problem: 
 Animations can compete with repaints, including those caused by loading a new view template. This could occur when a view template is being rendered (repaint occuring) and a slide animation occurring at the same time. in, 
 
-####Solution:
+#### Solution:
 Defer the animation until after you've painted. First, append your new view to the DOM, but make sure it's off the screen or transparent. Then, in a requestAnimationFrame call, do your animation. That's it! The requestAnimationFrame callback won't be called until the paint is done, and we're ready to animate.
 
 **Aka: Load/render template to be offscreen or transparent then use `requestAnimationFrame` to cause any animation to occur after paint is done.**  

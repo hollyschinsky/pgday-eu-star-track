@@ -1,4 +1,9 @@
-###Performance Tip: Hardware Acceleration
+---
+layout: module
+title: Module 10&#58; Performance Tips
+---
+
+### Performance Tip: Hardware Acceleration
 
 Many devices have a separate GPU that can be tapped by invoking a CSS transform on them. In effect, this trick is all about rendering your element the same as it always is but by telling the browser that you want a 3D transform, you’re moving the rendering of this element from the CPU to the GPU. You can do this by applying a simple CSS `translate3d` shown below.
 

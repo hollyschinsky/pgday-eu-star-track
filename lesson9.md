@@ -16,19 +16,27 @@ links to tools and resources that can help you further:
   - [Debugging with Safari Web Inspector](http://phonegap-tips.com/articles/debugging-ios-phonegap-apps-with-safaris-web-inspector.html)
 
 ### Securing your App
-- Attend Steve Gill's App Privacy and Security for PhoneGap Developers workshop today at 2:15!
-
+- Attend Steve Gill's App Privacy and Security for PhoneGap Developers workshop today at 2:15
 - [Tommy Williams PhoneGap Day US 2016 Workshop Slides](http://devgeeks.github.io/pixfor-vulnerable/assets/player/KeynoteDHTMLPlayer.html)
 
+### Push Notification Support
+Push notifications are a common requirement when developing mobile apps. See the links below for help implementing them in your PhoneGap apps.
+- Attend Simon MacDonald's **Push Notifications** Workshop today at 2:15
+- [Simon's MacDonald's PhoneGap Day Push Notification Workshop](http://macdonst.github.io/push-workshop/)
 
-### Adding Analytics
-Analytics can be used to determine how your app is being used, which features are popular and where your pain points are.  
+### Plugin Development  
+There are a vast number of plugins currently available for Cordova but you still may find yourself needing a specific native feature that is not already
+  supported. Learn how to write your own plugin below.
 
--[Adding Analytics to your PhoneGap Apps](http://phonegap.com/blog/2015/08/18/adding-analytics-to-your-phonegap-app/)
+- [Jesse MacFadyen's PhoneGap Day 2016 Slides](http://purplecabbage.github.io/slides/pgd16Plugins/index.html)
 
 ### App Submission (provisioning, code signing, submitting to app stores)
 - Attend **App Submission** workshop by Shazron Abdullah at 5pm today!
 - Check out this [useful guide to App Submission](https://github.com/timkim/phonegap-day-workshop-app-submission/wiki) built by the PhoneGap Team.  
+
+### Adding Analytics
+Analytics can be used to determine how your app is being used, which features are popular and where your pain points are.  
+-[Adding Analytics to your PhoneGap Apps](http://phonegap.com/blog/2015/08/18/adding-analytics-to-your-phonegap-app/)
 
 ### Updating your App (Over the Air Updates)
 Update your apps in the iOS App Store quickly without waiting on long approval processes using over the air updates. Use the following links as potential resources:
@@ -47,33 +55,19 @@ Below are some plugins for services supporting PhoneGap apps:
 - [Optimizely Cordova Plugin](https://github.com/optimizely/optimizely-cordova-plugin)
 - [Leanplum Cordova Plugin](https://github.com/Telerik-Verified-Plugins/Leanplum/blob/master/doc/index.md)
 
-### Push Notification Support
-Push notifications are a common requirement when developing mobile apps. See the links below for help implementing them in your PhoneGap apps.
-- Attend Simon MacDonald's **Push Notifications** Workshop today at 2:15!
-- [Simon's MacDonald's PhoneGap Day Push Notification Workshop](http://macdonst.github.io/push-workshop/)
-
-### Plugin Development  
-There are a vast number of plugins currently available for Cordova but you still may find yourself needing a specific native feature that is not already
-  supported. Learn how to write your own plugin below.
-
-- [Jesse MacFadyen's PhoneGap Day 2016 Slides](http://purplecabbage.github.io/slides/pgd16Plugins/index.html)
-
-### Developer Guides
-+ [Managing Click Delay]()
-+ [Plugin Architecture]()
-+ [Single Page Architecture]()
-
 #### Performance Tips
++ [Managing Click Delay](guides/managing-click-delay.html)
 + [Using CSS Sprite Sheets](guides/perf-tip-css-sprite-sheets.html)
-+ [Hardware Acceleration]()
-+ [Paint Before Animate]()
-+ [Scrolling Tips]()
-+ [Minimize Reflows]()
++ [Hardware Acceleration](guides/perf-tip-hardware-acceleration.html)
++ [Paint Before Animate](guides/perf-tip-paint-before-you-animate.html)
++ [Minimize Reflows](guides/perf-tip-minimize-reflows.html)
 + [Serve Images at Resolution](guides/perf-tip-serve-images-at-resolution.html)
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
-<a href="module8.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+<a href="lesson8.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+<a href="lesson10.html" class="btn btn-default pull-right">Next <i class="glyphicon
+glyphicon-chevron-right"></i></a>
 
 </div>
 </div>

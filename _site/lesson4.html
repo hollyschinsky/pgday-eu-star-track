@@ -68,21 +68,30 @@
 <div class="row">
 
     <div class="col-xs-12 col-sm-8">
-        <h1>Module 4&#58; Add Searchbar Component</h1>
+        <h1>Module 4&#58; Results Filtering</h1>
         <!--<hr/>-->
         <h3 id="overview">Overview</h3>
-<p>In this step we’ll add a Framework7 Searchbar component to our results page to allow the user to search/filter the results for a matching string.</p>
+<p>In this step we’ll add a Framework7 Searchbar component to our results page to allow the user to search/filter the results with a matching string
+entered by the user. This search is used to filter results once received.</p>
+
+<p>Below is the result on iOS and Android respectively:</p>
+
+<p><img class="screenshot-md2" src="images/ios-searchbar.png" />
+   <img class="screenshot-md2" src="images/android-searchbar.png" /></p>
 
 <h2 id="steps">Steps</h2>
 <ol>
-  <li>Begin by opening your browser and reviewing the Framework7 documentation for the <code class="highlighter-rouge">Searchbar</code> component at http://framework7.io/docs/searchbar.html.</li>
+  <li>Begin by opening your browser and reviewing the <a href="http://framework7.io/docs/searchbar.html">Framework7 documentation</a> for the <code class="highlighter-rouge">searchbar</code> component.</li>
   <li>
-    <p>Open <code class="highlighter-rouge">index.html</code> and locate the <code class="highlighter-rouge">results</code> template script tag:</p>
-
-    <p><code class="highlighter-rouge">&lt;script type="text/template7" id="results"&gt;</code></p>
+    <p>Open <code class="highlighter-rouge">www/index.html</code> and locate the <code class="highlighter-rouge">results</code> template script tag:
+         <code class="highlighter-rouge">
+         &lt;script type="text/template7" id="results"&gt;
+        </code></p>
   </li>
   <li>
-    <p>The <code class="highlighter-rouge">searchbar</code> needs to be placed somewhere within a <code class="highlighter-rouge">.page</code> class and just before a <code class="highlighter-rouge">.page-content</code> class. In the results template, locate the <code class="highlighter-rouge">&lt;div&gt;</code> with the <code class="highlighter-rouge">.page</code> class and associated <code class="highlighter-rouge">.navbar</code>. Insert the following search bar form which contains an input field with a clear button just after the block above and before the <code class="highlighter-rouge">&lt;div&gt;</code> with the <code class="highlighter-rouge">.page-content</code> class:</p>
+    <p>The <code class="highlighter-rouge">searchbar</code> needs to be placed somewhere within a <code class="highlighter-rouge">.page</code> class and just before a <code class="highlighter-rouge">.page-content</code> class. In the results template, locate the <code class="highlighter-rouge">&lt;div&gt;</code> with the <code class="highlighter-rouge">.page</code> class and associated <code class="highlighter-rouge">.navbar</code>. 
+Insert the following <code class="highlighter-rouge">searchbar</code> <code class="highlighter-rouge">&lt;form&gt;</code> element which contains an input field with a <code class="highlighter-rouge">clear</code> button just 
+before the <code class="highlighter-rouge">&lt;div&gt;</code> with the <code class="highlighter-rouge">.page-content</code> class as shown in the image directly below it:</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code>   &lt;form class="searchbar"&gt;
        &lt;div class="searchbar-input"&gt;
@@ -92,15 +101,18 @@
    &lt;/form&gt;
 </code></pre>
     </div>
-
-    <p>Such as shown in the image:
-<br />
-<br />
-  <img class="screenshot-lg" src="images/search-loc.png" /></p>
   </li>
+</ol>
+
+<p><img class="screenshot2" src="images/search-loc.png" /></p>
+
+<ol>
   <li>
-    <p>Next, open the <code class="highlighter-rouge">www/js/myApp.js</code> file and add the following code block just above the <code class="highlighter-rouge">myApp.onPageInit('details', function(page)</code> function. This function will run when the results page initializes and will initialize the searchbar component
-with the parameters shown:</p>
+    <p>Next, open the <code class="highlighter-rouge">www/js/myApp.js</code> file and add the following code block just above the <code class="highlighter-rouge">myApp.onPageInit('details', function(page) {..}))</code> function. 
+This new function will run when the <code class="highlighter-rouge">results</code> page initializes and will initialize the <code class="highlighter-rouge">searchbar</code> component
+with the parameters shown. Each of these parameters is set to a class name that you will apply in the HTML
+elements to mark the elements that should be used for each scenario (what list to search, what data to search, 
+what to display when found and not found etc):</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code>myApp.onPageInit('results', function(page) {
     var mySearchbar = myApp.searchbar('.searchbar', {
@@ -108,32 +120,33 @@ with the parameters shown:</p>
         searchIn: '.item-content',
         found: '.searchbar-found',
         notFound: 'searchbar-not-found'
-
     })
 })   
 </code></pre>
     </div>
 
-    <ul>
-      <li><code class="highlighter-rouge">searchList</code> - the class selector for the list containing the data to search</li>
-      <li><code class="highlighter-rouge">searchIn</code> - set to the class selector for the content to be searched. Defaults to <code class="highlighter-rouge">.item-title</code> otherwise.</li>
-      <li><code class="highlighter-rouge">found</code> - the class selector for the element or block to display with the matches found</li>
-      <li><code class="highlighter-rouge">notFound</code> - the class selector for the element to display in the case where no matches were found</li>
-    </ul>
+    <p><strong>Parameters:</strong>
+- <code class="highlighter-rouge">searchList</code> - the class selector for the list containing the data to search
+- <code class="highlighter-rouge">searchIn</code> - set to the class selector for the content to be searched. Defaults to <code class="highlighter-rouge">.item-title</code> otherwise.
+- <code class="highlighter-rouge">found</code> - the class selector for the element or block to display with the matches found
+- <code class="highlighter-rouge">notFound</code> - the class selector for the element to display in the case where no matches were found</p>
 
     <blockquote>
-      <p>See the <a href="http://framework7.io/docs/pages.html">Framework7 docs on Pages</a> to learn more about the events that can be handled for a page.</p>
+      <p>These parameters can also be initialized inline the HTML with <code class="highlighter-rouge">data-*</code> attributes. 
+  See the <a href="http://framework7.io/docs/pages.html">Framework7 docs on Pages</a> to learn more about the events that can be handled for a page.</p>
     </blockquote>
   </li>
   <li>
-    <p>Now go back into <code class="highlighter-rouge">www/index.html</code>  and add the <code class="highlighter-rouge">searchbar-found</code> to the <code class="highlighter-rouge">&lt;div&gt;</code> element containing the list block:</p>
+    <p>Now go back into <code class="highlighter-rouge">www/index.html</code>  and add the <code class="highlighter-rouge">searchbar-found</code> class to the <code class="highlighter-rouge">&lt;div&gt;</code> element containing 
+the list block, since it will create a filtered list using those same elements with the matched items:</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code> &lt;div class="list-block media-list searchbar-found"&gt;
 </code></pre>
     </div>
   </li>
   <li>
-    <p>Next add a new <code class="highlighter-rouge">&lt;div&gt;</code> element to show a message when no results are found, ensuring you specify the same class name you set in the searchbar init code. Add it just after the searchbar form.</p>
+    <p>Next add a new <code class="highlighter-rouge">&lt;div&gt;</code> element to show a message when no results are found, ensuring you specify the same class name you set in the 
+searchbar init function. Add this new <code class="highlighter-rouge">&lt;div&gt;</code> just after the searchbar form (class name is ‘searchbar-not-found’ in this case).</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code> &lt;div class="content-block searchbar-not-found"&gt;
         No matches found
@@ -142,7 +155,8 @@ with the parameters shown:</p>
     </div>
   </li>
   <li>
-    <p>Lastly, add a div with the <code class="highlighter-rouge">searchbar-overlay</code> class to enable a dark overlay effect for the page content when the search bar is active. Add it just after the <code class="highlighter-rouge">searchbar-not-found</code> <code class="highlighter-rouge">&lt;div&gt;</code> added above.</p>
+    <p>Lastly, add a new <code class="highlighter-rouge">&lt;div&gt;</code> element with the <code class="highlighter-rouge">searchbar-overlay</code> class to enable a dark overlay effect for the page content when the search bar is active. 
+Add it just after the <code class="highlighter-rouge">searchbar-not-found</code> <code class="highlighter-rouge">&lt;div&gt;</code> added above.</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code> &lt;div class="searchbar-overlay"&gt;&lt;/div&gt;
 </code></pre>
@@ -150,8 +164,8 @@ with the parameters shown:</p>
   </li>
 </ol>
 
-<h3 id="sanity-check">Sanity Check</h3>
-<p>The final code block with the additions should look like this:</p>
+<h3 id="code-review">Code Review</h3>
+<p>The final code block with all the additions should look like this code below:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>    &lt;form class="searchbar"&gt;
         &lt;div class="searchbar-input"&gt;
@@ -169,8 +183,7 @@ with the parameters shown:</p>
       &lt;div class="content-block-title"&gt; tracks returned&lt;/div&gt;
       &lt;div class="list-block media-list list-block-search searchbar-found"&gt;
         &lt;ul&gt;
-          
-            ...
+          {{#each tracks.items}}
 </code></pre>
 </div>
 
@@ -213,14 +226,15 @@ glyphicon-chevron-right"></i></a>
             <div class="panel-heading" style="font-variant:small-caps;font-size: 18px;">Modules</div>
             <ol class="list-group">
                 <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
-                <li><a href="lesson2.html">App Structure Review</a></li>
-                <li><a href="lesson3.html">Local Storage/Offline Handling</a></li>
-                <li><a href="lesson4.html">Add Searchbar</a></li>
-                <li><a href="lesson5.html">Making Your App Feel Native</a></li>
-                <li><a href="lesson8.html">Add Swipeouts</a></li>
-                <li><a href="lesson7.html">Add Native Share Feature</a></li>
-                <li><a href="lesson6.html">Configuring Your App</a></li>
-                <li><a href="lesson10.html">Next Steps</a></li>
+                <li><a href="lesson2.html">App Walkthru</a></li>
+                <li><a href="lesson3.html">Detecting Offline</a></li>
+                <li><a href="lesson4.html">Searchbar Filter</a></li>
+                <li><a href="lesson5.html">Add Swipeout Action</a></li>
+                <li><a href="lesson6.html">Add Native Share Feature</a></li>
+                <li><a href="lesson7.html">Making Your App Feel Native</a></li>
+                <li><a href="lesson8.html">Configuring Your App</a></li>
+                <li><a href="lesson9.html">Next Steps</a></li>
+                <li><a href="lesson10.html">Optional: Remote Debugging</a></li>
             </ol>
             <p></p>
         </div>

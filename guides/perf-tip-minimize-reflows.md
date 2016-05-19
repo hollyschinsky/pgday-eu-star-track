@@ -1,9 +1,14 @@
-###Performance Tip: Animate Wisely to Minimize Reflows
+---
+layout: module
+title: Module 10&#58; Performance Tips
+---
 
-####Problem:
+### Performance Tip: Animate Wisely to Minimize Reflows
+
+#### Problem:
 Animating properties that cause a change to visibility (width/height, color, outline) or layout will trigger a reflow or repaint, which is too expensive in terms of performance for mobile browsers to handle.
 
-####Solution: 
+#### Solution: 
 Stick to animating `transform` and `opacity` properties only until mobile web browsers are more optimized and can support more frames per second. 
 
 A **reflow** computes the layout of the page.  A reflow on an element recomputes the dimensions and position of the element, and it also triggers further reflows on that element’s children, ancestors and elements that appear after it in the DOM.  Then it calls a final repaint.  Reflowing is very expensive, but unfortunately it can be triggered easily.
@@ -30,7 +35,7 @@ In the HTML snippet above, a reflow on the paragraph would trigger a reflow of t
 
 Reflows are expensive and are one of the main causes of slow DOM scripts, particularly on devices with low processing power, such as phones. In many cases, they are equivalent to laying out the entire page again.
 
-###What causes a reflow?
+### What causes a reflow?
 + Resizing the window
 + Changing the font
 + Adding or removing a stylesheet
@@ -42,7 +47,7 @@ an input box
 + Calculating `offsetWidth` and `offsetHeight`
 + Setting a property of the style attribute
 
-###6 Best Practices to minimize reflows
+### 6 Best Practices to minimize reflows
 
 `Source credit: http://blog.letitialew.com/post/30425074101/repaints-and-reflows-manipulating-the-dom-responsibly`
 

@@ -23,7 +23,7 @@ GitHub repo [here](https://github.com/hollyschinsky/phonegap-day-eu-star-track).
 <img class="screenshot" src="images/star-track-screens-android.jpg"/>
 
 ## Dependencies
-We will be using PhoneGap, [Framework7](http://www.idangero.us/framework7) and the [Font Awesome Icon Font library](http://fortawesome.github.io/Font-Awesome/)
+We will be using PhoneGap, [Framework7](http://framework7.io) and the [Font Awesome Icon Font library](http://fortawesome.github.io/Font-Awesome/)
  to help us build this app. The following plugins are also used in the final version.
 
       <plugin name="cordova-plugin-whitelist" spec="~1.2.0" />
@@ -53,6 +53,7 @@ that version. To check simply run the command `phonegap -v`.
 SDK for that platform (iOS SDK, Android SDK, etc.) installed on your system.
 
 ## Useful Resources
+1. [Simple Spotify Browser](http://hollyschinsky.github.io/spotify-browser) - a tutorial to walk you through build out a simple spotify browser (different than Star Track) from start to finish with helpful lessons along the way. 
 1. [Pocket Guide](http://hollyschinsky.github.io/pocket-guide) - a similar app and workshop with a vanilla approach to a single page architecture and walks through specific
 tips and tricks to make your app feel and perform natively outside of a specific UI framework doing the work for you.
 2. [PhoneGap Workshop](http://hollyschinsky.github.io/phonegap-workshop) - a similar app with a workshop that goes step by step creating the routing, templates and views to understand Single Page Architecture.
@@ -60,7 +61,7 @@ tips and tricks to make your app feel and perform natively outside of a specific
 
 
 ## Issues/Feedback
-- Please create an issue [here](https://github.com/hollyschinsky/spotify-browser/issues) if you run
+- Please create an issue [here](https://github.com/hollyschinsky/pgday-eu-star-track/issues) if you run
 into any problems or if you have feedback.
 
 - You can also use the Comments section at the bottom of each module to ask a question or report a problem.

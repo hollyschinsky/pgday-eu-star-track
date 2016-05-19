@@ -1,6 +1,6 @@
 ---
 layout: module
-title: Module 6&#58; Configuring Your App
+title: Module 8&#58; Configuring Your App
 ---
 
 ### Overview
@@ -9,7 +9,7 @@ You can configure your app with specific preferences and settings depending on t
 #### Common Preferences
 1. DisallowOverscroll (iOS)
 
-By default the webview will have a bounce effect on iOS. You can see it when you try to drag down from the navigation bar, it will actually allow you to pull it down and snap back up when you stop:
+   By default the webview will have a bounce effect on iOS. You can see it when you try to drag down from the navigation bar, it will actually allow you to pull it down and snap back up when you stop:
 
     <img class="screenshot-md" src="images/bounce.png"/>
 
@@ -40,26 +40,17 @@ By default the webview will have a bounce effect on iOS. You can see it when you
 
          <allow-intent href="market:*" />
 
+>All of these settings are already included in your base template project so no action is required.
 
->These settings are already included in your base template project so no action is required.
-
-4. #### Content Security Policy
-- The CSP is used to help secure your app and mitigate injections and vulnerabilities like cross-site scripting (XSS). You can customize it to whitelist approved sites amongst other things. To use it you need to ensure you have the [Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist) added to your project (already included in the base template by default) and add a meta tag to your index.html that declares the specific policy you want to apply for your app.
-
-      `<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com` `https://api.spotify.com 'unsafe-eval' 'unsafe-inline' ws://localhost:3000; style-src 'self' 'unsafe-inline';` `media-src *; img-src * data:">`
-
-
-
-
+4. Content Security Policy
 #### Content Security Policy
 The CSP is used to help secure your app and mitigate injections and vulnerabilities like cross-site scripting (XSS). You can customize it to
 whitelist approved sites amongst other things. To use it you need to ensure you have the [Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist
 added to your project (already included in the base template by default) and add a meta tag to your index.html that declares the specific policy
  you want to apply for your app.
 
-1. Open the `index.html` file and add the following Content Security Policy meta tag. This will allow the access required for this particular app.
-
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; script-src * 'unsafe-eval'; style-src 'self'; media-src *; frame-src *;  img-src * data:; connect-src * 'unsafe-eval'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com` `https://api.spotify.com 'unsafe-eval' 'unsafe-inline' ws://localhost:3000; 
+    style-src 'self' 'unsafe-inline';` `media-src *; img-src * data:">
 
 2. If you plan to run on the Android platform, you should also open the `config.xml` and add this line into the Android platform-specific section:
 
@@ -142,8 +133,8 @@ when you decide to use the CLI to build locally and outside of the PhoneGap Deve
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
-<a href="lesson5.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
-<a href="lesson7.html" class="btn btn-default pull-right">Next <i class="glyphicon
+<a href="lesson7.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+<a href="lesson9.html" class="btn btn-default pull-right">Next <i class="glyphicon
 glyphicon-chevron-right"></i></a>
 </div>
 </div>

@@ -1,6 +1,6 @@
 ---
 layout: module
-title: Module 10&#58; Next Steps
+title: Module 10&#58; Performance Tips
 ---
 
 ###Performance Tip: Using CSS Sprite Sheets

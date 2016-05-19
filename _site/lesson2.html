@@ -70,18 +70,20 @@
     <div class="col-xs-12 col-sm-8">
         <h1>Module 2&#58; App Walkthrough</h1>
         <!--<hr/>-->
-        <p>In this lesson we’ll walk through the Star Track app to learn how it works and look at some important pieces to be aware
+        <p>In this lesson we’ll walk through the base Star Track app to learn how it works and look at some important pieces to be aware
 of including a bit about some Framework7 components and settings specifically. Through this exercise we’ll also gain an
-understanding of how a Single Page Application works.</p>
+understanding of how a <a href="guides/single-page-architecture.html">Single Page Application</a> works.</p>
 
 <blockquote>
-  <p>An app that loads a single HTML page and dynamically updates that page as the user interacts with the app. SPAs use AJAX and HTML5 to create fluid and responsive Web apps, without constant page reloads.
+  <p><strong>A Single Page App</strong> is an app that loads a single HTML page and dynamically updates that page as the user interacts with the app. 
+SPAs use AJAX and HTML5 to create fluid and responsive Web apps without constant page reloads.
 <br /><a href="https://msdn.microsoft.com/en-us/magazine/dn463786.aspx">Source</a><br /></p>
 </blockquote>
 
 <h2 id="framework7-initialization">Framework7 initialization</h2>
-<p>When you initialize your app in Framework7, there are various parameters that could be specified depending on how you
-want things to work in your app. Review the <a href="http://framework7.io/docs/init-app.html">docs here</a> for all of the options available. In the Star Track app, the following are used and set in the <code class="highlighter-rouge">www/js/my-app.js</code> file:</p>
+<p>When you initialize your app in Framework7, there are various parameters you could specify depending on how you
+want things to work in your app. Review the <a href="http://framework7.io/docs/init-app.html">docs here</a> for all of the options available. 
+In the Star Track app, the following are used and set in the <code class="highlighter-rouge">www/js/my-app.js</code> file:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>var myApp = new Framework7({
   material: isIos? false : true,       // activate material-specific
@@ -89,30 +91,30 @@ want things to work in your app. Review the <a href="http://framework7.io/docs/i
   precompileTemplates: true,           // auto compile all templates
   swipePanel: 'left',                  // enable swipe for side panels
   swipePanelActiveArea: '30',          // Width to trigger swipe panel
-  swipeBackPage: true,                 // Enable swipe back from left edge to previous page
-  animateNavBackIcon: true,            // native look to dynamic navbar icon animation
+  swipeBackPage: true,                 // Swipe back from left edge 
+  animateNavBackIcon: true,            // Dynamic navbar icon animation
   pushState: !!Framework7.prototype.device.os,  //enable hash navigation in browser mode
 });
 </code></pre>
 </div>
 
 <h2 id="themes">Themes</h2>
-<p>Open the <code class="highlighter-rouge">www/index.html</code> and locate the <code class="highlighter-rouge">&lt;body&gt;</code> tag. You can give your app a new theme by modifying the <code class="highlighter-rouge">theme-green</code> class to another color. To find out which colors are supported, refer to the <a href="http://framework7.io/docs/color-themes.html">Framework7 theme docs</a> for the platform you’re testing on. If you’re running it in the browser it will default to material using code set in the <code class="highlighter-rouge">js/init-styles.js</code>
+<p>Open the <code class="highlighter-rouge">www/index.html</code> and locate the <code class="highlighter-rouge">&lt;body&gt;</code> tag. You can give your app a new theme by modifying the <code class="highlighter-rouge">theme-green</code> class to another color. To find out which colors are supported, refer to the <a href="http://framework7.io/docs/color-themes.html">Framework7 theme docs</a> for the platform you’re testing on. If you’re running it in the browser it will default to material using code set in the <code class="highlighter-rouge">www/js/init-styles.js</code>
 file. For instance, you could choose purple if you’re running with the material style:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;body class="theme-purple"&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;body class="theme-purple"&gt;
 </code></pre>
 </div>
 
 <p>Alternatively, two layout themes (white and dark) are also supported and affect the background and font colors. The default is white. Go ahead and apply the <code class="highlighter-rouge">layout-dark</code> class to the <code class="highlighter-rouge">&lt;body&gt;</code> tag now to see how it affects the app:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;body class="layout-dark"&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;body class="layout-dark"&gt;
 </code></pre>
 </div>
 
 <p>For this workshop, let’s set it to a combination of the following:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;body class="layout-dark theme-green"&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;body class="layout-dark theme-green"&gt;
 </code></pre>
 </div>
 
@@ -120,10 +122,10 @@ file. For instance, you could choose purple if you’re running with the materia
 input field to change the <code class="highlighter-rouge">type="search"</code> to <code class="highlighter-rouge">type="text"</code> to ensure the text content is displayed in white with this new
 color scheme. Locate the following <code class="highlighter-rouge">&lt;input&gt;</code> element and change the type to <code class="highlighter-rouge">text</code> as shown:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;div class="item-input"&gt;
-      &lt;input name="q" type="text" placeholder="track, artist or album"
-        autocorrect="off" autocapitalize="off"&gt;
-    &lt;/div&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;div class="item-input"&gt;
+    &lt;input name="q" type="text" placeholder="track, artist or album"
+    autocorrect="off" autocapitalize="off"&gt;
+&lt;/div&gt;
 </code></pre>
 </div>
 
@@ -151,15 +153,10 @@ as well.</p>
   </li>
   <li>
     <p><strong>Side Panel</strong> - You can use up to 2 panels in an app, one on left side and another one on right side and they should be added to the beginning of the body tag. These panels are hidden initially and can be used
-for a side menu. You can also specify an effect, either <code class="highlighter-rouge">cover</code> or <code class="highlighter-rouge">reveal</code>. Modify yours now, then try clicking the hamburger icon to trigger the panel to open to see the difference.</p>
+for a side menu. You can also specify an effect when the panel is shown by setting a class to either <code class="highlighter-rouge">panel-cover</code> or <code class="highlighter-rouge">panel-reveal</code>. Modify yours now, then try clicking the hamburger icon to 
+trigger the panel to open to see the difference.</p>
 
-    <p>Change:</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;div class="panel panel-left panel-cover"&gt;
-
-to
-
-&lt;div class="panel panel-left panel-reveal"&gt;
+    <div class="highlighter-rouge"><pre class="highlight"><code>&lt;div class="panel panel-left panel-reveal"&gt;
 </code></pre>
     </div>
   </li>
@@ -168,7 +165,9 @@ to
 <p><br /></p>
 
 <h4 id="views-and-pages">Views and Pages</h4>
-<p>Based on the above terminology, in our Star Track App we are using one View (stack of pages) and we navigate between these pages by loading different <strong>templates</strong> into the main view container along with the required <strong>data</strong> to bind to that page so the expressions are properly evaluated. This is based on the <a href="guides/single-page-architecture.html"><strong>Single Page Architecture</strong></a> approach and helps ensure your hybrid apps are performant.</p>
+<p>Based on the above terminology, in our Star Track App we are using one View (stack of pages) and we navigate between these pages by loading different <strong>templates</strong> 
+into the main view container along with the required <strong>data</strong> to bind to that page so the expressions are properly evaluated. This is based 
+on the <a href="guides/single-page-architecture.html"><strong>Single Page Architecture</strong></a> approach and helps ensure your hybrid apps are performant.</p>
 
 <p>The high level DOM hierarchy to describe the app looks like this.</p>
 
@@ -189,11 +188,13 @@ to
 
 <p><br /></p>
 
+<p><img class="screenshot-full" src="images/view-pages.png" /></p>
+
 <h4 id="main-view">Main View</h4>
 <p>The main view displays the static <code class="highlighter-rouge">index</code> page initially and then transitions the results page in by loading the template with the results of the ajax call to the Spotify API. Open your <code class="highlighter-rouge">index.html</code> file now and locate the <code class="highlighter-rouge">index</code> page denoted by the
 <code class="highlighter-rouge">data-page</code> attribute set to index:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  &lt;div data-page="index" class="page"&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code> &lt;div data-page="index" class="page"&gt;
 </code></pre>
 </div>
 
@@ -202,7 +203,7 @@ enable a dynamic navbar and turn on cacheing so previous pages are held in the D
 
 <div class="highlighter-rouge"><pre class="highlight"><code>  var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true,  // enable Dynamic Navbar for iOS
-    domCache: true,       // previous pages not removed from DOM as you go deeper in the stack
+    domCache: true,       // previous pages stay in DOM
   });
 </code></pre>
 </div>
@@ -230,9 +231,8 @@ enable a dynamic navbar and turn on cacheing so previous pages are held in the D
 </code></pre>
 </div>
 
-<p>Open the app in the browser and view it with the Chrome devtools to see how the pages are loaded and removed depending on what action you take.</p>
-
-<p><img class="screenshot-lg" src="images/dom.png" /></p>
+<p>Open the app in the browser and view it with the Chrome devtools to notice how the pages are loaded from the templates and 
+removed depending on what action you take.</p>
 
 <p><br /></p>
 
@@ -325,14 +325,15 @@ glyphicon-chevron-right"></i></a>
             <div class="panel-heading" style="font-variant:small-caps;font-size: 18px;">Modules</div>
             <ol class="list-group">
                 <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
-                <li><a href="lesson2.html">App Structure Review</a></li>
-                <li><a href="lesson3.html">Local Storage/Offline Handling</a></li>
-                <li><a href="lesson4.html">Add Searchbar</a></li>
-                <li><a href="lesson5.html">Making Your App Feel Native</a></li>
-                <li><a href="lesson8.html">Add Swipeouts</a></li>
-                <li><a href="lesson7.html">Add Native Share Feature</a></li>
-                <li><a href="lesson6.html">Configuring Your App</a></li>
-                <li><a href="lesson10.html">Next Steps</a></li>
+                <li><a href="lesson2.html">App Walkthru</a></li>
+                <li><a href="lesson3.html">Detecting Offline</a></li>
+                <li><a href="lesson4.html">Searchbar Filter</a></li>
+                <li><a href="lesson5.html">Add Swipeout Action</a></li>
+                <li><a href="lesson6.html">Add Native Share Feature</a></li>
+                <li><a href="lesson7.html">Making Your App Feel Native</a></li>
+                <li><a href="lesson8.html">Configuring Your App</a></li>
+                <li><a href="lesson9.html">Next Steps</a></li>
+                <li><a href="lesson10.html">Optional: Remote Debugging</a></li>
             </ol>
             <p></p>
         </div>

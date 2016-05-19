@@ -68,28 +68,28 @@
 <div class="row">
 
     <div class="col-xs-12 col-sm-8">
-        <h1>Module 6&#58; Configuring Your App</h1>
+        <h1>Module 8&#58; Configuring Your App</h1>
         <!--<hr/>-->
         <h3 id="overview">Overview</h3>
 <p>You can configure your app with specific preferences and settings depending on the type of app you’re building. In this module we’ll look at some popular preferences and settings you should be aware of when building your apps.</p>
 
 <h4 id="common-preferences">Common Preferences</h4>
 <ol>
-  <li>DisallowOverscroll (iOS)</li>
+  <li>
+    <p>DisallowOverscroll (iOS)</p>
+
+    <p>By default the webview will have a bounce effect on iOS. You can see it when you try to drag down from the navigation bar, it will actually allow you to pull it down and snap back up when you stop:</p>
+
+    <p><img class="screenshot-md" src="images/bounce.png" /></p>
+
+    <p>Normally you would want your nav bar and toolbars to stay fixed though, so typically
+you’ll want to disable this effect in your apps. Set this property to true in your config.xml:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;preference name="DisallowOverscroll" value="true" /&gt;
+</code></pre>
+    </div>
+  </li>
 </ol>
-
-<p>By default the webview will have a bounce effect on iOS. You can see it when you try to drag down from the navigation bar, it will actually allow you to pull it down and snap back up when you stop:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;img class="screenshot-md" src="images/bounce.png"/&gt;
-</code></pre>
-</div>
-
-<p>Normally you would want your nav bar and toolbars to stay fixed though, so typically
-   you’ll want to disable this effect in your apps. Set this property to true in your config.xml:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>    &lt;preference name="DisallowOverscroll" value="true" /&gt;
-</code></pre>
-</div>
 
 <blockquote>
   <p>If you try to set this to false you will see the bounce effect but only when you’re running on an iOS
@@ -138,35 +138,20 @@
 </ul>
 
 <blockquote>
-  <p>These settings are already included in your base template project so no action is required.</p>
+  <p>All of these settings are already included in your base template project so no action is required.</p>
 </blockquote>
 
 <ol>
   <li>
-    <h4 id="content-security-policy">Content Security Policy</h4>
-    <ul>
-      <li>
-        <p>The CSP is used to help secure your app and mitigate injections and vulnerabilities like cross-site scripting (XSS). You can customize it to whitelist approved sites amongst other things. To use it you need to ensure you have the <a href="https://github.com/apache/cordova-plugin-whitelist">Cordova Whitelist Plugin</a> added to your project (already included in the base template by default) and add a meta tag to your index.html that declares the specific policy you want to apply for your app.</p>
-
-        <p><code class="highlighter-rouge">&lt;meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com</code> <code class="highlighter-rouge">https://api.spotify.com 'unsafe-eval' 'unsafe-inline' ws://localhost:3000; style-src 'self' 'unsafe-inline';</code> <code class="highlighter-rouge">media-src *; img-src * data:"&gt;</code></p>
-      </li>
-    </ul>
-  </li>
-</ol>
-
-<h4 id="content-security-policy-1">Content Security Policy</h4>
-<p>The CSP is used to help secure your app and mitigate injections and vulnerabilities like cross-site scripting (XSS). You can customize it to
+    <p>Content Security Policy
+#### Content Security Policy
+The CSP is used to help secure your app and mitigate injections and vulnerabilities like cross-site scripting (XSS). You can customize it to
 whitelist approved sites amongst other things. To use it you need to ensure you have the [Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist
 added to your project (already included in the base template by default) and add a meta tag to your index.html that declares the specific policy
  you want to apply for your app.</p>
 
-<ol>
-  <li>
-    <p>Open the <code class="highlighter-rouge">index.html</code> file and add the following Content Security Policy meta tag. This will allow the access required for this particular app.</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; script-src * 'unsafe-eval'; style-src 'self'; media-src *; frame-src *;  img-src * data:; connect-src * 'unsafe-eval'"&gt;
-</code></pre>
-    </div>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com` `https://api.spotify.com 'unsafe-eval' 'unsafe-inline' ws://localhost:3000; 
+ style-src 'self' 'unsafe-inline';` `media-src *; img-src * data:" />
   </li>
   <li>
     <p>If you plan to run on the Android platform, you should also open the <code class="highlighter-rouge">config.xml</code> and add this line into the Android platform-specific section:</p>
@@ -280,8 +265,8 @@ when you decide to use the CLI to build locally and outside of the PhoneGap Deve
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
-<a href="lesson5.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
-<a href="lesson7.html" class="btn btn-default pull-right">Next <i class="glyphicon
+<a href="lesson7.html" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Previous</a>
+<a href="lesson9.html" class="btn btn-default pull-right">Next <i class="glyphicon
 glyphicon-chevron-right"></i></a>
 </div>
 </div>
@@ -317,14 +302,15 @@ glyphicon-chevron-right"></i></a>
             <div class="panel-heading" style="font-variant:small-caps;font-size: 18px;">Modules</div>
             <ol class="list-group">
                 <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
-                <li><a href="lesson2.html">App Structure Review</a></li>
-                <li><a href="lesson3.html">Local Storage/Offline Handling</a></li>
-                <li><a href="lesson4.html">Add Searchbar</a></li>
-                <li><a href="lesson5.html">Making Your App Feel Native</a></li>
-                <li><a href="lesson8.html">Add Swipeouts</a></li>
-                <li><a href="lesson7.html">Add Native Share Feature</a></li>
-                <li><a href="lesson6.html">Configuring Your App</a></li>
-                <li><a href="lesson10.html">Next Steps</a></li>
+                <li><a href="lesson2.html">App Walkthru</a></li>
+                <li><a href="lesson3.html">Detecting Offline</a></li>
+                <li><a href="lesson4.html">Searchbar Filter</a></li>
+                <li><a href="lesson5.html">Add Swipeout Action</a></li>
+                <li><a href="lesson6.html">Add Native Share Feature</a></li>
+                <li><a href="lesson7.html">Making Your App Feel Native</a></li>
+                <li><a href="lesson8.html">Configuring Your App</a></li>
+                <li><a href="lesson9.html">Next Steps</a></li>
+                <li><a href="lesson10.html">Optional: Remote Debugging</a></li>
             </ol>
             <p></p>
         </div>

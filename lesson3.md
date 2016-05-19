@@ -1,70 +1,86 @@
 ---
 layout: module
-title: Module 3&#58; Detecting Offline
+title: Module 3&#58; Handling Network Status Change
 ---
 
-### Overview
-When building for mobile you should always take an offline-first approach. There will be times when the user has no network connectivity and their experience shouldn’t suffer as a result. You can mitigate this by using local storage or another mobile database solution (SQLite, PouchDB) to provide an optimal experience in periods of low or no signal.
+## Overview
+When building for mobile you should always take an offline-first approach. There will be times when the 
+user has no network connectivity and their experience shouldn’t suffer as a result.
+The Apple app store actually tests to ensure that you are handling an offline scenario when you submit your apps for review.
 
-In this lesson you will learn how to use the Network Information plugin to detect network status. 
+For example, Instagram notifies the user there's no internet connection while you're in the app using a notification
+at the top of the screen:
 
-    $ phonegap plugin add cordova-plugin-network-information --save
+ <img class="screenshot" src="images/instagram-off.png"/>
+ 
 
+When building PhoneGap apps you can easily check the current status of the connection using the [Cordova Network Information Plugin]
+(https://github.com/apache/cordova-plugin-network-information). You can also setup event listeners to be notified when the 
+connection goes from online to offline and vice versa and take action then accordingly. 
 
-[Plugin Docs](https://github.com/apache/cordova-plugin-network-information)
+In this lesson you will learn how to use this plugin to detect and listen for network changes and pop up a toast
+notification to the user. 
+
+## Requirements
+Before you can code this feature, you'll first need to add the Cordova Network Information Plugin to your project since it is not yet used in the Star Track base
+app template. 
+
+1. Open your terminal and use the PhoneGap CLI to add it now (the `--save` parameter will save the plugin to your `config.xml` file): 
+
+       phonegap plugin add cordova-plugin-network-information --save
+
+   >Be sure to visit the [Cordova Network Information Plugin Docs](https://github.com/apache/cordova-plugin-network-information) to learn about any platform quirks and more things you can do 
+  with this plugin.
 
 ## Steps
-1. Open `www/index.html` and add a wifi icon to the `index` page navbar on the right side to indicate the current connection status:
+1. Open `www/index.html` and add a wifi icon to the `index` page `navbar` on the right side to indicate 
+the current connection status. Font Awesome is already included in the project and has an icon you can use
+with the name `fa-wifi`.
 
-    #### Change this
-      <!-- Top Navbar-->
-      <div class="navbar">
-        <div class="navbar-inner" data-page="index">
-          <div class="left">
-            <!--
-              Left link contains only icon - additional "icon-only" class
-              Additional "open-panel" class tells app to open panel when we click on this link
-            -->
-            <a href="#" class="link icon-only open-panel"><i class="fa fa-bars"></i></a>
-          </div>
-          <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-          <div class="center sliding">Search</div>
+  Insert the new code snippet for the icon directly after this line for the index page (denoted by `data-page="index"`). The result will look like this below: 
+   
+     <div class="navbar">
+      <div class="navbar-inner" data-page="index">
+        <div class="left">
+        <!--
+            Left link contains only icon - additional "icon-only" class
+            Additional "open-panel" class tells app to open panel when we click on this link
+        -->
+        <a href="#" class="link icon-only open-panel"><i class="fa fa-bars"></i></a>
+        </div>
+        <div class="center sliding">Search</div>
+        <div class="right">
+        <!--
+            Right icon indicates network connection               
+        -->
+        <a href="#" class="icon-only"><i class="fa fa-wifi"></i></a>
         </div>
       </div>
+     </div>    
+    
+      
+   The icon doesn't actually do anything meaningful yet but we'll add handling to change the color of it to
+   indicate online/offline status. 
 
-      #### TO
-      <!-- Top Navbar-->
-      <div class="navbar">
-        <div class="navbar-inner" data-page="index">
-          <div class="left">
-            <!--
-              Left link contains only icon - additional "icon-only" class
-              Additional "open-panel" class tells app to open panel when we click on this link
-            -->
-            <a href="#" class="link icon-only open-panel"><i class="fa fa-bars"></i></a>
-          </div>
-          <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-          <div class="center sliding">Search</div>
-          <div class="right">
-            <!--
-              Right icon indicates network connection               
-            -->
-            <a href="#" class="icon-only"><i class="fa fa-wifi"></i></a>
-          </div>
-        </div>
-      </div>    
+   >Note that due to platform styling differences, we're using different colors between the platforms to indicate
+   online and offline.       
 
+   <img class="screenshot-md2" src="images/ios-online-icon.png"/>
+   <img class="screenshot-md2" src="images/ios-offline-icon.png"/>
+  
 1. Now open the `www/js/my-app.js` file and add the following variable declaration to the top of the file under the `isIOS`
-and `isMaterial` handling:
+and `isMaterial` handling. This will keep the current network status in case we need to check it in other parts of the code.
+We'll begin by assuming it's offline until the next step can determine it for sure. 
 
-    var offline = true;
+      var offline = true;
 
-1. Now open the `www/js/my-app.js` file and add the following code to the `deviceready` function
+1. Next open the `www/js/my-app.js` file and add the following code to the `deviceready()` function.
 
-    This code checks the status of the current connection and indicates it with the icon color (styled
-    differently per platform), and then adds listeners to listen for a change in status for further handling.
+    This code checks to ensure the plugin is available and then checks if the current 
+    connection is none, indicating it would be offline. In this case it will set the color to gray on both
+    platforms. It then adds event listeners to the `offline` and `online` events to listen for a change in 
+    status to allow for further handling in those scenarios.
 
-    // First Check the current connection state
     if (navigator.connection && navigator.connection.type == Connection.NONE) {
       $$('.fa-wifi').addClass('color-gray');     
     }
@@ -77,38 +93,54 @@ and `isMaterial` handling:
 
     // Add a listener to detect a change in the connection from online to offline and vice versa
     document.addEventListener("offline", onOffline, false);
-    document.addEventListener("online", onOnline, false);  
+    document.addEventListener("online", onOnline, false);
+    
+    >You should always ensure you wait until the `deviceready` event is fired before using any Cordova 
+    native plugins.   
 
-2. Add a function for the `onOffline` handler:     
+3. Next we'll add the functions for the onOffline and onOnline handlers. They both will display
+a toast notification to indicate the status change and set the colors of the wifi icon on the main
+page for visual notification. (See the [Framework7 notification docs](http://framework7.io/docs/notifications.html) 
+for more details on using these toast style notifications in your apps).    
 
+   - Add the function for the `onOffline` handler:     
+   
         function onOffline() {
            offline = true;
-           // Show a toast notification to indicate the change
            myApp.addNotification({
                 title: 'Connection Status',
                 message: 'A previously connected device has gone offline.'
            });
-           // Set the wifi icon colors to reflect the change
            if (isIos) $$('.fa-wifi').removeClass('color-green').addClass('color-gray');
            else $$('.fa-wifi').removeClass('color-white').addClass('color-gray');            
         }
 
-2. Add a function for the `onOnline` handler:
+  - Add the function for the `onOnline` handler:
 
-    function onOnline() {
-        // Show a toast notification to indicate the change
-        myApp.addNotification({
-            title: 'Connection Status',
-            message: 'A previously connected device has come back online'
-        });
-        // Set the wifi icon colors to reflect the change
-        if (isIos) $$('.fa-wifi').removeClass('color-gray').addClass('color-green');
-        else $$('.fa-wifi').removeClass('color-gray').addClass('color-white');    
-        offline = false;
-    }
+        function onOnline() {
+            // Show a toast notification to indicate the change
+            myApp.addNotification({
+                title: 'Connection Status',
+                message: 'A previously connected device has come back online'
+            });
+            // Set the wifi icon colors to reflect the change
+            if (isIos) $$('.fa-wifi').removeClass('color-gray').addClass('color-green');
+            else $$('.fa-wifi').removeClass('color-gray').addClass('color-white');    
+            offline = false;
+        }
+    
+## Run it
+The end result should look like the following where you see a notification displayed when you go offline and
+online. 
 
+   <img class="screenshot2" src="images/ios-network-detect.png"/>
+  
+  
 >At this point you could further handle the experience as desired. You may want to store some data in local storage
-or another on-device database to allow them to use the app with the cached data. Or save off data and sync it to a server when you're back online, just depends on the app.
+or another on-device database to allow them to use the app with the cached data. Your app may also have data
+that needs to be saved off to be synced to a server when you're back online. The goal is to provide the most
+optimal user experience.  
+
 
 
 

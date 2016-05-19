@@ -3,18 +3,18 @@ layout: module
 title: Module 2&#58; App Walkthrough
 ---
 
-In this lesson we'll walk through the Star Track app to learn how it works and look at some important pieces to be aware
+In this lesson we'll walk through the base Star Track app to learn how it works and look at some important pieces to be aware
 of including a bit about some Framework7 components and settings specifically. Through this exercise we'll also gain an
-understanding of how a Single Page Application works.
+understanding of how a [Single Page Application](guides/single-page-architecture.html) works.
 
-
->An app that loads a single HTML page and dynamically updates that page as the user interacts with the app. SPAs use AJAX and HTML5 to create fluid and responsive Web apps, without constant page reloads.
+>**A Single Page App** is an app that loads a single HTML page and dynamically updates that page as the user interacts with the app. 
+SPAs use AJAX and HTML5 to create fluid and responsive Web apps without constant page reloads.
 <br><a href="https://msdn.microsoft.com/en-us/magazine/dn463786.aspx">Source</a><br>
 
 ## Framework7 initialization
-When you initialize your app in Framework7, there are various parameters that could be specified depending on how you
-want things to work in your app. Review the [docs here](http://framework7.io/docs/init-app.html) for all of the options available. In the Star Track app, the following are used and set in the `www/js/my-app.js` file:
-
+When you initialize your app in Framework7, there are various parameters you could specify depending on how you
+want things to work in your app. Review the [docs here](http://framework7.io/docs/init-app.html) for all of the options available. 
+In the Star Track app, the following are used and set in the `www/js/my-app.js` file:
 
     var myApp = new Framework7({
       material: isIos? false : true,       // activate material-specific
@@ -22,36 +22,35 @@ want things to work in your app. Review the [docs here](http://framework7.io/doc
       precompileTemplates: true,           // auto compile all templates
       swipePanel: 'left',                  // enable swipe for side panels
       swipePanelActiveArea: '30',          // Width to trigger swipe panel
-      swipeBackPage: true,                 // Enable swipe back from left edge to previous page
-      animateNavBackIcon: true,            // native look to dynamic navbar icon animation
+      swipeBackPage: true,                 // Swipe back from left edge 
+      animateNavBackIcon: true,            // Dynamic navbar icon animation
       pushState: !!Framework7.prototype.device.os,  //enable hash navigation in browser mode
     });
 
 
-
 ## Themes
-Open the `www/index.html` and locate the `<body>` tag. You can give your app a new theme by modifying the `theme-green` class to another color. To find out which colors are supported, refer to the [Framework7 theme docs](http://framework7.io/docs/color-themes.html) for the platform you're testing on. If you're running it in the browser it will default to material using code set in the `js/init-styles.js`
+Open the `www/index.html` and locate the `<body>` tag. You can give your app a new theme by modifying the `theme-green` class to another color. To find out which colors are supported, refer to the [Framework7 theme docs](http://framework7.io/docs/color-themes.html) for the platform you're testing on. If you're running it in the browser it will default to material using code set in the `www/js/init-styles.js`
 file. For instance, you could choose purple if you're running with the material style:
 
-        <body class="theme-purple">
+    <body class="theme-purple">
 
 
 Alternatively, two layout themes (white and dark) are also supported and affect the background and font colors. The default is white. Go ahead and apply the `layout-dark` class to the `<body>` tag now to see how it affects the app:
 
-        <body class="layout-dark">
+    <body class="layout-dark">
 
 For this workshop, let's set it to a combination of the following:
 
-        <body class="layout-dark theme-green">
+    <body class="layout-dark theme-green">
 
 There's one more change to make before moving on here due to the change for the dark theme. We need to modify the search
 input field to change the `type="search"` to `type="text"` to ensure the text content is displayed in white with this new
 color scheme. Locate the following `<input>` element and change the type to `text` as shown:
 
-        <div class="item-input">
-          <input name="q" type="text" placeholder="track, artist or album"
-            autocorrect="off" autocapitalize="off">
-        </div>
+    <div class="item-input">
+        <input name="q" type="text" placeholder="track, artist or album"
+        autocorrect="off" autocapitalize="off">
+    </div>
 
 >The color themes will be applied a bit differently between platforms. You could also apply specific themes to sub-elements within the body as well, like page, view, navbar, list-block etc. Refer to [the docs](http://framework7.io/docs/color-themes.html) for more details on other classes that can be used to change the background color, font color and border color in their utility classes 
 as well.      
@@ -70,20 +69,17 @@ Single page applications are considered the best approach for hybrid app develop
 - **Page** - Similar to a web page, this is what we're transitioning between. There can be many pages within a single view.
 
 - **Side Panel** - You can use up to 2 panels in an app, one on left side and another one on right side and they should be added to the beginning of the body tag. These panels are hidden initially and can be used
-for a side menu. You can also specify an effect, either `cover` or `reveal`. Modify yours now, then try clicking the hamburger icon to trigger the panel to open to see the difference.
-
-  Change:
-
-      <div class="panel panel-left panel-cover">
-
-      to
+for a side menu. You can also specify an effect when the panel is shown by setting a class to either `panel-cover` or `panel-reveal`. Modify yours now, then try clicking the hamburger icon to 
+trigger the panel to open to see the difference.
 
       <div class="panel panel-left panel-reveal">
 
 <br>
 
 #### Views and Pages
-Based on the above terminology, in our Star Track App we are using one View (stack of pages) and we navigate between these pages by loading different **templates** into the main view container along with the required **data** to bind to that page so the expressions are properly evaluated. This is based on the [**Single Page Architecture**](guides/single-page-architecture.html) approach and helps ensure your hybrid apps are performant.
+Based on the above terminology, in our Star Track App we are using one **view** (stack of pages called main view) and we navigate between these pages by 
+loading different **templates** into the main view container along with the required **data** to bind to that page so the expressions are properly evaluated. This is based 
+on the [**Single Page Architecture**](guides/single-page-architecture.html) approach and helps ensure your hybrid apps are performant.
 
 The high level DOM hierarchy to describe the app looks like this.
 
@@ -102,18 +98,21 @@ The high level DOM hierarchy to describe the app looks like this.
 
 <br>
 
+  <img class="screenshot-full" src="images/view-pages.png"/>
+
+
 #### Main View
 The main view displays the static `index` page initially and then transitions the results page in by loading the template with the results of the ajax call to the Spotify API. Open your `index.html` file now and locate the `index` page denoted by the
 `data-page` attribute set to index:
 
-      <div data-page="index" class="page">
+     <div data-page="index" class="page">
 
 Then open the `www/js/my-app.js` file and notice the code used to add this main view along with some parameters to
 enable a dynamic navbar and turn on cacheing so previous pages are held in the DOM.
 
       var mainView = myApp.addView('.view-main', {
         dynamicNavbar: true,  // enable Dynamic Navbar for iOS
-        domCache: true,       // previous pages not removed from DOM as you go deeper in the stack
+        domCache: true,       // previous pages stay in DOM
       });
 
 <br>
@@ -137,9 +136,8 @@ The other *pages* for the app are defined in [Template7 templates](http://framew
           -
       </script>    
 
-Open the app in the browser and view it with the Chrome devtools to see how the pages are loaded and removed depending on what action you take.
-
-<img class="screenshot-lg" src="images/dom.png"/>
+Open the app in the browser and view it with the Chrome devtools to notice how the pages are loaded from the templates and 
+removed depending on what action you take.
 
 <br>
 
