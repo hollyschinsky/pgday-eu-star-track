@@ -30,7 +30,7 @@
   <title>Star Track</title>
 </head>
 
-<body class="layout-dark  theme-green">
+<body class="layout-dark theme-green">
   <!-- Status bar overlay for full screen mode (PhoneGap) -->
   <div class="statusbar-overlay"></div>
 
@@ -109,7 +109,6 @@
                   <li class="item-divider">Limit to:</li>
                   <li>
                     <label class="label-radio item-content">
-                      <!-- Checked by default -->
                       <input type="radio" name="filter" value="track">
                       <div class="item-media">
                         <i class="icon icon-form-radio"></i>
@@ -121,7 +120,6 @@
                   </li>
                   <li>
                     <label class="label-radio item-content">
-                      <!-- Checked by default -->
                       <input type="radio" name="filter" value="artist">
                       <div class="item-media">
                         <i class="icon icon-form-radio"></i>
@@ -133,7 +131,6 @@
                   </li>
                   <li>
                     <label class="label-radio item-content">
-                      <!-- Checked by default -->
                       <input type="radio" name="filter" value="album">
                       <div class="item-media">
                         <i class="icon icon-form-radio"></i>
@@ -197,8 +194,7 @@
         </div>
         {{/if}}
 
-        <!-- PhoneGap Day Essentials Workshop -->
-        <!-- Add Search Bar -->
+        <!-- Workshop - Add Search Bar -->
         <form class="searchbar">
             <div class="searchbar-input">
                 <input type="search" placeholder="Search">
@@ -210,15 +206,16 @@
                Nothing found
         </div>
         
-        <!-- Search Bar overlay-->
+        <!-- Workshop - Add Search Bar overlay-->
         <div class="searchbar-overlay"></div>
+        
         <div class="page-content">
           <div class="content-block-title">{{tracks.count}} tracks returned</div>
+          <!-- Workshop - Add searchbar-found class to media-list -->
           <div class="list-block media-list list-block-search searchbar-found">
              <ul>
               {{#each tracks.items}}
-              <!-- PhoneGap Day Essentials Workshop -->
-              <!-- Add Swipeout -->
+              <!-- Workshop - Add Swipeout -->
               <li class="swipeout">
                 <div class="swipeout-content">
                     <a href="#" class="item-link item-content"
@@ -226,7 +223,7 @@
                     data-context="{{stringify this}}"
                     data-template="details">
                     <div class="item-media">
-                        <img width="80" src="{{this.album.images[0].url}}">
+                        <img width="80" data-src="{{this.album.images[0].url}}" class="lazy">
                     </div>
                     <div class="item-inner">
                         <div class="item-title-row">
@@ -238,10 +235,8 @@
                     </div>
                     </a>
                 </div>  
-                <!-- PhoneGap Day Essentials Workshop -->               
-                <!-- Add Swipeout action on right -->                
+                <!-- Workshop - Add Swipeout action on right -->                
                 <div class="swipeout-actions-right">
-                    <!-- Swipeout actions links/buttons -->
                     <a href="#" class="share" data-item="{{@index}}">
                     {{#if @global.material}} 
                         <i class="icon fa fa-share-alt fa-3x"></i></a>
@@ -299,7 +294,8 @@
         <div class="page-content">
           <div class="card">
             <div class="card-header no-border no-padding">
-              <img src="{{this.album.images[0].url}}" width="100%" />
+              <!-- Workshop - add lazy loading -->
+              <img data-src="{{this.album.images[0].url}}" width="100%" class="lazy"/>
             </div>
             <div class="card-content">
               <div class="card-content-inner">
@@ -374,7 +370,8 @@
                   data-template="details"
                 >
                   <div class="item-media">
-                    <img width="80" src="{{this.album.images[0].url}}">
+                  <!-- Workshop - add lazy loading -->
+                    <img width="80" data-src="{{this.album.images[0].url}}" class="lazy"> 
                   </div>
                   <div class="item-inner">
                     <div class="item-title-row">
