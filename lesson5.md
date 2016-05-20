@@ -48,7 +48,8 @@ that will be added in the next lesson.
 
 4. Run your app to ensure you see the new swipeout action on the right side when you swipe on a list item.
 
-    <img class="screenshot-lg-center" src="images/ios-swipeout.png"/>  
+    <img class="screenshot-lg-center" src="images/ios-swipeout.png"/>
+    <img class="screenshot-lg-center" src="images/android-swipeout.png"/>  
 
    >IMPORTANT: Based on the Framework7 docs, the swipeout support will not work well in the browser so you should test this feature via the PhoneGap Developer App or the CLI locally.
 
