@@ -11,7 +11,7 @@ will not need to implement them in this particular app but it's important to be 
 
 1. **Remove tap highlight**
 
-    <img class="screenshot-full" src="images/webkit-tap-highlight.png"/>
+    <img class="screenshot-md" src="images/webkit-tap-highlight.png"/>
 
         -webkit-tap-highlight-color: rgba(0,0,0,0);
         -webkit-tap-highlight-color: transparent;
@@ -20,7 +20,7 @@ will not need to implement them in this particular app but it's important to be 
 
 1. **Disable user selections** on actionable elements (for instance a select on a long tap)
 
-    <img class="screenshot-md2" src="images/webkit-user-select.png"/>
+    <img class="screenshot-md" src="images/webkit-user-select.png"/>
 
     Fix with:
 
