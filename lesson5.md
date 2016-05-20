@@ -14,18 +14,45 @@ The iOS Reminders app is a good example of an app using swipeouts:
 ## Steps
 1. Take a moment to review the [Framework7 Swipeout Docs](http://framework7.io/docs/swipeout.html)
 
-1. Open `index.html` and add the `swipeout` class to the current `<li>` tag:
+1. Open `index.html`, locate the `results` template and within the list, add the `swipeout` class to the existing `<li>` tag
+such as:
 
-      <li class="swipeout">
+      `<li class="swipeout">`
 
-2. Now add a new `<div>` element with the class of `swipeout-content` just below it the `<li>`
-and end it after the <`li`>
+2. Now add a new `<div>` element with the class of `swipeout-content` just below the `<li>`
+and ending `</div>` just before the <`/li`>
+{% raw %}
+        <div class="swipeout-content">
+        <ul>
+            {{#each tracks.items}}
+            <!-- Workshop - add swipeout-->
+            <li class="swipeout">
+            <div class="swipeout-content">
+                <a href="#" class="item-link item-content"
+                data-item="{{@index}}"
+                data-context="{{stringify this}}"
+                data-template="details">
+                <div class="item-media">
+                    <img width="80" src="{{this.album.images[0].url}}">
+                </div>
+                <div class="item-inner">
+                    <div class="item-title-row">
+                    <div class="item-title">{{this.name}}</div>
+                    <div class="item-after">{{durationFromMs this.duration_ms}}</div>
+                    </div>
+                    <div class="item-subtitle">{{this.artists[0].name}}</div>
+                    <div class="item-text">{{this.album.name}}</div>
+                </div>
+                </a>
+            </div>
+            </li>
+            {{/each}}
+        </ul>
+    {% endraw %}
 
-      <div class="swipeout-content">
-
-2. Add the following snippet just before the closing `<\li>`. This code will create the action itself
-with a link containing a `share` class that we'll list to for clicks and pass along the index of the
-item clicked. It also sets the share icon based on the platform.
+2. Add the following snippet just before the closing `</li>`. This code will create the action itself
+with a link containing a `share` class that we'll listen to for clicks(taps) and pass along the index of the
+item clicked. It also sets a different share icon based on the platform.
  {% raw %}
                 <!-- Swipeout actions right -->                
                 <div class="swipeout-actions-right">
@@ -48,8 +75,8 @@ that will be added in the next lesson.
 
 4. Run your app to ensure you see the new swipeout action on the right side when you swipe on a list item.
 
-    <img class="screenshot-lg-center" src="images/ios-swipeout.png"/>
-    <img class="screenshot-lg-center" src="images/android-swipeout.png"/>  
+    <img class="screenshot-md2" src="images/ios-swipeout.png"/>
+    <img class="screenshot-md2" src="images/android-swipeout.png"/>  
 
    >IMPORTANT: Based on the Framework7 docs, the swipeout support will not work well in the browser so you should test this feature via the PhoneGap Developer App or the CLI locally.
 

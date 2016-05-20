@@ -40,7 +40,7 @@ what to display when found and not found etc):
 
        myApp.onPageInit('results', function(page) {
            var mySearchbar = myApp.searchbar('.searchbar', {
-               searchList: '.media-list',
+               searchList: '.list-block-search',
                searchIn: '.item-content',
                found: '.searchbar-found',
                notFound: 'searchbar-not-found'
@@ -48,10 +48,10 @@ what to display when found and not found etc):
        })   
 
   **Parameters:**
-  - `searchList` - the class selector for the list containing the data to search
-  - `searchIn` - set to the class selector for the content to be searched. Defaults to `.item-title` otherwise.
-  - `found` - the class selector for the element or block to display with the matches found
-  - `notFound` - the class selector for the element to display in the case where no matches were found
+  -`searchList` - the class selector for the list containing the data to search
+  -`searchIn` - set to the class selector for the content to be searched. Defaults to `.item-title` otherwise.
+  -`found` - the class selector for the element or block to display with the matches found
+  -`notFound` - the class selector for the element to display in the case where no matches were found
    
    >These parameters can also be initialized inline the HTML with `data-*` attributes. 
   See the [Framework7 docs on Pages](http://framework7.io/docs/pages.html) to learn more about the events that can be handled for a page.
@@ -59,7 +59,7 @@ what to display when found and not found etc):
 3. Now go back into `www/index.html`  and add the `searchbar-found` class to the `<div>` element containing 
 the list block, since it will create a filtered list using those same elements with the matched items:
 
-        <div class="list-block media-list searchbar-found">
+        <div class="list-block media-list list-block-search searchbar-found">
         
 4. Next add a new `<div>` element to show a message when no results are found, ensuring you specify the same class name you set in the 
 searchbar init function. Add this new `<div>` just after the searchbar form (class name is 'searchbar-not-found' in this case).
