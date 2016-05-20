@@ -46,12 +46,13 @@ what to display when found and not found etc):
                notFound: 'searchbar-not-found'
            })
        })   
-
-  **Parameters:**
-  -`searchList` - the class selector for the list containing the data to search
-  -`searchIn` - set to the class selector for the content to be searched. Defaults to `.item-title` otherwise.
-  -`found` - the class selector for the element or block to display with the matches found
-  -`notFound` - the class selector for the element to display in the case where no matches were found
+       
+       
+###### Parameters
+  - `searchList` - the class selector for the list containing the data to search
+  - `searchIn` - set to the class selector for the content to be searched. Defaults to `.item-title` otherwise.
+  - `found` - the class selector for the element or block to display with the matches found
+  - `notFound` - the class selector for the element to display in the case where no matches were found
    
    >These parameters can also be initialized inline the HTML with `data-*` attributes. 
   See the [Framework7 docs on Pages](http://framework7.io/docs/pages.html) to learn more about the events that can be handled for a page.

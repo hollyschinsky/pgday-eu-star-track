@@ -14,8 +14,7 @@ at the top of the screen:
  <img class="screenshot" src="images/instagram-off.png"/>
  
 
-When building PhoneGap apps you can easily check the current status of the connection using the [Cordova Network Information Plugin]
-(https://github.com/apache/cordova-plugin-network-information). You can also setup event listeners to be notified when the 
+When building PhoneGap apps you can easily check the current status of the connection using the [Cordova Network Information Plugin](https://github.com/apache/cordova-plugin-network-information). You can also setup event listeners to be notified when the 
 connection goes from online to offline and vice versa and take action then accordingly. 
 
 In this lesson you will learn how to use this plugin to detect and listen for network changes and pop up a toast
@@ -33,34 +32,35 @@ app template.
   with this plugin.
 
 ## Steps
-1. Open `www/index.html` and add a wifi icon to the `index` page `navbar` on the right side to indicate 
+- Open `www/index.html` and add a wifi icon to the `index` page `navbar` on the right side to indicate 
 the current connection status. [Font Awesome](http://fontawesome.io/icons/) is already included in the project and has an icon you can use
 with the name `fa-wifi`.
 
-  First locate the `navbar` defined for the `index` page in the `www/index.html' file. You can search for `navbar` and find the one
+  First locate the `navbar` defined for the `index` page in the `www/index.html` file. You can search for `navbar` and find the one
   with the attribute `data-page="index"`. Add the right side definition as shown in the snippet below. (The whole navbar definition is
-  included for easier reference).  
-   
-     <div class="navbar">
-      <div class="navbar-inner" data-page="index">
-        <div class="left">
-            <!--
-                Left link contains only icon - additional "icon-only" class
-                Additional "open-panel" class tells app to open panel when we click on this link
-            -->
-            <a href="#" class="link icon-only open-panel"><i class="fa fa-bars"></i></a>
+  included for easier reference). 
+  
+    {% raw %}
+        <div class="navbar">
+        <div class="navbar-inner" data-page="index">
+            <div class="left">
+                <!--
+                    Left link contains only icon - additional "icon-only" class
+                    Additional "open-panel" class tells app to open panel when we click on this link
+                -->
+                <a href="#" class="link icon-only open-panel"><i class="fa fa-bars"></i></a>
+            </div>
+            <div class="center sliding">Search</div>
+            <!-- Workshop - Add right navbar icon -->
+            <div class="right">
+                <!--
+                    Right icon indicates network connection status               
+                -->
+                <a href="#" class="icon-only"><i class="fa fa-wifi"></i></a>
+            </div>
         </div>
-        <div class="center sliding">Search</div>
-        <!-- Workshop - Add right navbar icon -->
-        <div class="right">
-            <!--
-                Right icon indicates network connection status               
-            -->
-            <a href="#" class="icon-only"><i class="fa fa-wifi"></i></a>
-        </div>
-      </div>
-     </div>    
-    
+        </div>    
+        {% endraw %}
       
    The icon doesn't actually do anything meaningful yet but we'll add handling to change the color of it to
    indicate online/offline status. 
@@ -74,37 +74,37 @@ with the name `fa-wifi`.
    <img class="screenshot-md2" src="images/android-offline.png"/>
    
   
-1. Now open the `www/js/my-app.js` file and add the following variable declaration to the top of the file under the `isIos`
+- Now open the `www/js/my-app.js` file and add the following variable declaration to the top of the file under the `isIos`
 and `isMaterial` handling. This will keep the current network status in case we need to check it in other parts of the code.
 We'll begin by assuming it's offline until the next step can determine it for sure. 
 
        var offline = true;
 
-1. While still in the `www/js/my-app.js` file, add the following code to the `deviceready()` function.
+- While still in the `www/js/my-app.js` file, add the following code to the `deviceready()` function.
 
-    This code checks to ensure the plugin is available and then checks if the current 
-    connection is none, indicating it would be offline. In this case it will set the color to gray on both
-    platforms. It then adds event listeners to the `offline` and `online` events to listen for a change in 
-    status to allow for further handling in those scenarios.
-
-    if (navigator.connection && navigator.connection.type == Connection.NONE) {
-      $$('.fa-wifi').addClass('color-gray');     
-    }
-    else {
-      // It's connected, set a flag and icon colors
-      offline = false;
-      if (isIos) $$('.fa-wifi').addClass('color-green');
-      else $$('.fa-wifi').addClass('color-white');
-    }
-
-    // Add a listener to detect a change in the connection from online to offline and vice versa
-    document.addEventListener("offline", onOffline, false);
-    document.addEventListener("online", onOnline, false);
+  This code checks to ensure the plugin is available and then checks if the current 
+  connection is none, indicating it would be offline. In this case it will set the color to gray on both
+  platforms. It then adds event listeners to the `offline` and `online` events to listen for a change in 
+  status to allow for further handling in those scenarios.
+  
+      
+        if (navigator.connection && navigator.connection.type == Connection.NONE) {
+            $$('.fa-wifi').addClass('color-gray');     
+        }
+        else {
+            // It's connected, set a flag and icon colors
+            offline = false;
+            if (isIos) $$('.fa-wifi').addClass('color-green');
+            else $$('.fa-wifi').addClass('color-white');
+        }
+        
+        document.addEventListener("offline", onOffline, false);
+        document.addEventListener("online", onOnline, false);
+ 
     
-    >You should always ensure you wait until the `deviceready` event is fired before using any Cordova 
-    native plugins.   
+  >You should always ensure you wait until the `deviceready` event is fired before using any Cordova native plugins.   
 
-3. Next we'll add the functions for the `onOffline` and `onOnline` handlers. They will both display
+- Next we'll add the functions for the `onOffline` and `onOnline` handlers. They will both display
 a toast style notification to indicate the status change and set the colors of the wifi icon on the main
 page for visual notification. (See the [Framework7 notification docs](http://framework7.io/docs/notifications.html) 
 for more details on using these toast style notifications in your apps).    

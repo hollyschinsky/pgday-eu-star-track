@@ -4,3 +4,4 @@ platforms/
 plugins/
 hooks/
 .jekyll-metadata
+_site/

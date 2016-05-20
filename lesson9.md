@@ -59,7 +59,7 @@ Below are some plugins for services supporting PhoneGap apps:
 + [Managing Click Delay](guides/managing-click-delay.html)
 + [Using CSS Sprite Sheets](guides/perf-tip-css-sprite-sheets.html)
 + [Hardware Acceleration](guides/perf-tip-hardware-acceleration.html)
-+ [Paint Before Animate](guides/perf-tip-paint-before-you-animate.html)
++ [Paint Before Animate](guides/perf_tip_paint_before_you_animate.html)
 + [Minimize Reflows](guides/perf-tip-minimize-reflows.html)
 + [Serve Images at Resolution](guides/perf-tip-serve-images-at-resolution.html)
 

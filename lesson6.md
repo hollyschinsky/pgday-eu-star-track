@@ -4,11 +4,11 @@ title: Module 6&#58; Add Native Share Feature
 ---
 In this module we'll learn how to share a media item with a friend through messaging, email etc using the device's native sharing features.
 
-#### iOS
 <img class="screenshot-sm" src="images/share0.png"/>
 <img class="screenshot-sm" src="images/share-ios.png"/>
+<img class="screenshot-sm" src="images/android-share.png"/>
 
-#### Requirements:
+## Requirements
 Before you can add code to support this feature, you'll first need to add the [Social Sharing Plugin](https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin
 to your project since it is not yet used in the Star Track base app template. 
 
@@ -21,7 +21,7 @@ to learn about any platform quirks and more things you can do with this plugin. 
 great plugins were written by Eddy Verbruggen and can be found on his [GitHub repo](https://github.com/EddyVerbruggen).  
 
 
-### Steps
+## Steps
 Prior to this step we added a `swipeout` action to the results view with a share button though it doesn't actually do anything yet. 
 In this module we'll add event handling to this button to trigger the Social Sharing plugin functions. 
 
@@ -53,9 +53,9 @@ not supported). Remember, this is a 3rd party plugin so you can only test this f
 
   <img class="screenshot-sm" src="images/swipeout-ios.png"/>
   <img class="screenshot-sm" src="images/share0.png"/>  
-  <img class="screenshot-sm" src="images/share-android.png"/>
+  <img class="screenshot-sm" src="images/ios-share.png"/>
   <img class="screenshot-sm" src="images/android-swipeout.png"/>
-  <img class="screenshot-sm" src="images/share-android.png"/>
+  <img class="screenshot-sm" src="images/android-share.png"/>
   
   >The options shown in the share menu will depend on your particular devices' native sharing options.
 
