@@ -8,14 +8,14 @@ In this module we'll learn how to share a media item with a friend through messa
 <img class="screenshot-sm" src="images/android-share.png"/>
 
 ## Requirements
-Before you can add code to support this feature, you'll first need to add the [Social Sharing Plugin](https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin
+Before you can add code to support this feature, you'll first need to add the [Social Sharing Plugin](https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin)
 to your project since it is not yet used in the Star Track base app template. 
 
 1. Open your terminal and use the PhoneGap CLI to add it now (the `--save` parameter will save the plugin to your `config.xml` file): 
 
        phonegap plugin add cordova-plugin-x-socialsharing --save
 
->Be sure to visit the [Social Sharing Plugin Docs](https://github.com/apache/cordova-plugin-network-information) 
+>Be sure to visit the [Social Sharing Plugin Docs](https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin) 
 to learn about any platform quirks and more things you can do with this plugin. This plugin and many other 
 great plugins were written by Eddy Verbruggen and can be found on his [GitHub repo](https://github.com/EddyVerbruggen).  
 

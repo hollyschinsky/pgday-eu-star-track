@@ -70,6 +70,7 @@ with the name `fa-wifi`.
 
    <img class="screenshot-md2" src="images/ios-online-icon.png"/>
    <img class="screenshot-md2" src="images/ios-offline-icon.png"/>
+   <br><br>
    <img class="screenshot-md2" src="images/android-online.png"/>
    <img class="screenshot-md2" src="images/android-offline.png"/>
    

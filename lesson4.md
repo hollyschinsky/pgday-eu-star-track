@@ -30,8 +30,7 @@ before the `<div>` with the `.page-content` class as shown in the image directly
               </div>      
           </form>
 
-  <img class="screenshot2" src="images/search-loc.png"/>
-  
+   <img class="screenshot2" src="images/search-loc.png"/>
 2. Next, open the `www/js/myApp.js` file and add the following code block just above the `myApp.onPageInit('details', function(page) {..}))` function. 
 This new function will run when the `results` page initializes and will initialize the `searchbar` component
 with the parameters shown. Each of these parameters is set to a class name that you will apply in the HTML
@@ -48,13 +47,14 @@ what to display when found and not found etc):
        })   
        
        
-###### Parameters
-  - `searchList` - the class selector for the list containing the data to search
-  - `searchIn` - set to the class selector for the content to be searched. Defaults to `.item-title` otherwise.
-  - `found` - the class selector for the element or block to display with the matches found
-  - `notFound` - the class selector for the element to display in the case where no matches were found
+   **Parameters**<br>
    
-   >These parameters can also be initialized inline the HTML with `data-*` attributes. 
+    - searchList - the class selector for the list containing the data to search
+    - searchIn - set to the class selector for the content to be searched. Defaults to `.item-title` otherwise.
+    - found - the class selector for the element or block to display with the matches found
+    - notFound - the class selector for the element to display in the case where no matches were found
+   
+    >These parameters can also be initialized inline the HTML with `data-*` attributes. 
   See the [Framework7 docs on Pages](http://framework7.io/docs/pages.html) to learn more about the events that can be handled for a page.
 
 3. Now go back into `www/index.html`  and add the `searchbar-found` class to the `<div>` element containing 
