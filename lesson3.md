@@ -142,7 +142,8 @@ online.
    <img class="screenshot2" src="images/ios-network-detect.png"/>
   
 ## Extra Credit
-Requiring users to have to close the notifications is less than ideal. Instead, set a timeout and close them programmatically.
+Requiring users to have to close the notifications is less than ideal. Instead, check out the additional parameters available
+in Framework7 notifications that could help make it a better experience. 
   
 >At this point you could further handle the experience as desired. You may want to store some data in local storage
 or another on-device database to allow them to use the app with the cached data. Your app may also have data
