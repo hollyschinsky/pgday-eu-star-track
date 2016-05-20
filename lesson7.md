@@ -10,9 +10,11 @@ will not need to implement them in this particular app but it's important to be 
 >All of the tips in the above list are already built into Framework7 but important to understand when building hybrid apps.
 
 1. **Remove tap highlight**
+    Remove the highlight effect when tapping on a link if you're not handling it properly:
 
     <img class="screenshot-md" src="images/webkit-tap-highlight.png"/>
-
+        
+    Fix with:
         -webkit-tap-highlight-color: rgba(0,0,0,0);
         -webkit-tap-highlight-color: transparent;
             
