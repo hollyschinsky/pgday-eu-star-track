@@ -1,6 +1,6 @@
 ---
 layout: module
-title: Module 8&#58; Configuring Your App
+title: Module 8&#58; Bonus: Configuring Your App
 ---
 
 ### Overview
