@@ -13,8 +13,9 @@ will not need to implement them in this particular app but it's important to be 
     <img class="screenshot-md" src="images/webkit-tap-highlight.png"/>
         
     Fix with:
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
-        -webkit-tap-highlight-color: transparent;
+    
+         -webkit-tap-highlight-color: rgba(0,0,0,0);
+         -webkit-tap-highlight-color: transparent;
             
     Hold tap on a list item or other element and notice how it's affected when the above is not set..                         
 
@@ -61,6 +62,7 @@ will not need to implement them in this particular app but it's important to be 
 4. **Use System Fonts**
 
    Ensure you're using the fonts native to the platform. Here's some general rules:
+    
     - iOS: `font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;`
 
     - Android: `font-family: 'RobotoRegular', 'Droid Sans', sans-serif;`

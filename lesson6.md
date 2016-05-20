@@ -4,8 +4,7 @@ title: Module 6&#58; Add Native Share Feature
 ---
 In this module we'll learn how to share a media item with a friend through messaging, email etc using the device's native sharing features.
 
-<img class="screenshot-sm" src="images/share0.png"/>
-<img class="screenshot-sm" src="images/share-ios.png"/>
+<img class="screenshot-sm" src="images/ios-share.png"/>
 <img class="screenshot-sm" src="images/android-share.png"/>
 
 ## Requirements
@@ -51,9 +50,9 @@ not supported). Remember, this is a 3rd party plugin so you can only test this f
 
   It should look something like below when you run it on iOS:
 
-  <img class="screenshot-sm" src="images/swipeout-ios.png"/>
-  <img class="screenshot-sm" src="images/share0.png"/>  
+  <img class="screenshot-sm" src="images/ios-swipeout.png"/>
   <img class="screenshot-sm" src="images/ios-share.png"/>
+  <br><br>
   <img class="screenshot-sm" src="images/android-swipeout.png"/>
   <img class="screenshot-sm" src="images/android-share.png"/>
   

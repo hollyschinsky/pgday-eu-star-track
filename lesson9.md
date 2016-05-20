@@ -16,7 +16,7 @@ links to tools and resources that can help you further:
   - [Debugging with Safari Web Inspector](http://phonegap-tips.com/articles/debugging-ios-phonegap-apps-with-safaris-web-inspector.html)
 
 ### Securing your App
-- Attend Steve Gill's App Privacy and Security for PhoneGap Developers workshop today at 2:15
+- Attend [Steve Gill's](https://twitter.com/stevesgill) App Privacy and Security for PhoneGap Developers workshop today at 2:15
 - [Tommy Williams PhoneGap Day US 2016 Workshop Slides](http://devgeeks.github.io/pixfor-vulnerable/assets/player/KeynoteDHTMLPlayer.html)
 
 ### Push Notification Support

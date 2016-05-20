@@ -46,6 +46,9 @@ that version. To check simply run the command `phonegap -v`.
 
     - `~/pgday2016/pgday-eu-star-track` - the final project for reference
     - `~/pgday2016/myStarTrack`         - the base star track app to enhance
+    
+>You can view the list of PhoneGap templates available by running `phonegap template list` from the 
+PhoneGap CLI.     
 
 ## Run the base app
 Before moving on, ensure your newly created Star Track app based on the template works since we will be building on this
