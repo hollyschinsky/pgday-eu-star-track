@@ -11,7 +11,7 @@ will not need to implement them in this particular app but it's important to be 
 
 1. **Remove tap highlight**
 
-    <img class="screenshot-full" src="images/tap-highlight-issue.png"/>
+    <img class="screenshot-full" src="images/webkit-tap-highlight.png"/>
 
         -webkit-tap-highlight-color: rgba(0,0,0,0);
         -webkit-tap-highlight-color: transparent;

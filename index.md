@@ -19,8 +19,7 @@ The sample app project is located on my associated
 GitHub repo [here](https://github.com/hollyschinsky/phonegap-day-eu-star-track). The slides that I used in the workshop at PhoneGap Day US can be found
 [here](http://devgirl.org/files/pgday/www/#0).    
 
-<img class="screenshot" src="images/star-track-screens-ios.jpg"/>
-<img class="screenshot" src="images/star-track-screens-android.jpg"/>
+<img class="screenshot" src="images/and-screens.jpg"/>
 
 ## Dependencies
 We will be using PhoneGap, [Framework7](http://framework7.io) and the [Font Awesome Icon Font library](http://fortawesome.github.io/Font-Awesome/)

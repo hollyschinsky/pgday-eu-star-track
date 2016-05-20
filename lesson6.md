@@ -18,7 +18,7 @@ to your project since it is not yet used in the Star Track base app template.
 
 >Be sure to visit the [Social Sharing Plugin Docs](https://github.com/apache/cordova-plugin-network-information) 
 to learn about any platform quirks and more things you can do with this plugin. This plugin and many other 
-great plugins were written by Eddy Verbruggen and can be found on his GitHub repo.  
+great plugins were written by Eddy Verbruggen and can be found on his [GitHub repo](https://github.com/EddyVerbruggen).  
 
 
 ### Steps
@@ -29,21 +29,21 @@ In this module we'll add event handling to this button to trigger the Social Sha
 <br>
 2. Add the following code to handle when a user clicks the *share* button on the swipeout. You can add it just after the  `searchbar` init handling:
 
-     $$(page.container).find('.share').on('click', function (e) {
-        var item = page.context.tracks.items[this.dataset.item]
+        $$(page.container).find('.share').on('click', function (e) {
+            var item = page.context.tracks.items[this.dataset.item]
 
-        if (window.plugins && window.plugins.socialsharing) {
-            window.plugins.socialsharing.share("Hey! I found this on Spotify. It's called " + item.name + ", check it out!",
-                'Check this out', item.album.images[2].url, item.preview_url,
-                function () {
-                    console.log("Share Success")
-                },
-                function (error) {
-                    console.log("Share fail " + error)
-                });
-        }
-        else myApp.alert("Share plugin not found");
-    });
+            if (window.plugins && window.plugins.socialsharing) {
+                window.plugins.socialsharing.share("Hey! I found this on Spotify. It's called " + item.name + ", check it out!",
+                    'Check this out', item.album.images[2].url, item.preview_url,
+                    function () {
+                        console.log("Share Success")
+                    },
+                    function (error) {
+                        console.log("Share fail " + error)
+                    });
+            }
+            else myApp.alert("Share plugin not found");
+        });
 
 ## Try it! 
 Try out the button now to make sure you see the share features for your native device (or a message stating the plugin is 

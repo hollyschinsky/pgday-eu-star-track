@@ -7,7 +7,7 @@ title: Module 8&#58; Configuring Your App
 You can configure your app with specific preferences and settings depending on the type of app you're building. In this module we'll look at some popular preferences and settings you should be aware of when building your apps.
 
 #### Common Preferences
-1. DisallowOverscroll (iOS)
+1. **DisallowOverscroll** (iOS)
 
    By default the webview will have a bounce effect on iOS. You can see it when you try to drag down from the navigation bar, it will actually allow you to pull it down and snap back up when you stop:
 
@@ -22,11 +22,11 @@ You can configure your app with specific preferences and settings depending on t
   device directly outside of the PhoneGap Developer App since the PhoneGap Developer app has it configured
   to true in the wrapper config.xml.       
 
-2. iOS Backup Storage (defaults to iCloud)
+2. **iOS Backup Storage** (defaults to iCloud)
 
         <preference name="BackupWebStorage" value="none" />
 
-3. Orientation (iOS)
+3. **Orientation** (iOS)
 
          <preference name="Orientation" value="all" />
 
@@ -36,14 +36,12 @@ You can configure your app with specific preferences and settings depending on t
          <allow-intent href="itms:*" />
          <allow-intent href="itms-apps:*" />
 
-- **android**
-
+    - **android**
          <allow-intent href="market:*" />
 
 >All of these settings are already included in your base template project so no action is required.
 
 4. Content Security Policy
-#### Content Security Policy
 The CSP is used to help secure your app and mitigate injections and vulnerabilities like cross-site scripting (XSS). You can customize it to
 whitelist approved sites amongst other things. To use it you need to ensure you have the [Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist
 added to your project (already included in the base template by default) and add a meta tag to your index.html that declares the specific policy
@@ -52,23 +50,14 @@ added to your project (already included in the base template by default) and add
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com` `https://api.spotify.com 'unsafe-eval' 'unsafe-inline' ws://localhost:3000; 
     style-src 'self' 'unsafe-inline';` `media-src *; img-src * data:">
 
-2. If you plan to run on the Android platform, you should also open the `config.xml` and add this line into the Android platform-specific section:
-
-        <allow-navigation href="http://*/*" />
-
-    The end result looks like:
-
-        <platform name="android">
-                <preference name="android-minSdkVersion" value="14" />
-                <allow-intent href="market:*" />
-                <allow-navigation href="http://*/*" />
-        </platform>
 
 To learn more about how to customize the CSP specifically, check out the [Cordova Whitelist Guide](http://cordova.apache.org/docs/en/latest/guide/appdev/whitelist/index.html)
   and [Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy).  
  Also, you can get help generating your specific header to include in the meta tag more easily using this [website](http://cspisawesome.com/).
 
-3. Icons and Splash screens
+3. Icons and Splash screens - set up the paths for each platform with the different required attributes according. The icons
+have already been set up in the Star Track app so you can use the `config.xml` file for ar reference. See the
+[Official Cordova guides](https://cordova.apache.org/docs/en/latest/config_ref/images.html) for details. 
 
            <platform name="ios">
                <icon height="180" src="res/icon/ios/icon-60@3x.png" width="180" />
@@ -83,7 +72,7 @@ To learn more about how to customize the CSP specifically, check out the [Cordov
                ...
            </platform>
 
- >These settings are already included in your base template project so no action is required.
+ >All of the above settings are already included in the base template project so no action is required.
 
 
 #### General Icon Support
@@ -120,8 +109,9 @@ these assets will all be copied down to their respective platform locations for 
     and all the different sizes supported.
 
 ### Plugin Dependencies
-At this point it's worth going over all of the plugins this project relies on. You can add them into your config.xml so you have them
-when you decide to use the CLI to build locally and outside of the PhoneGap Developer app.
+At this point it's worth going over all of the plugins this project relies on. You should always ensure they have been saved to your
+ config.xml so they will be automatically installed when you decide to use the CLI to build locally and outside of the PhoneGap 
+ Developer app.
 
         <plugin name="cordova-plugin-statusbar" spec="~1.0.1" />
         <plugin name="cordova-plugin-console" spec="~1.0.1" />

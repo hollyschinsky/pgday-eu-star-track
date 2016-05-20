@@ -82,7 +82,7 @@ to your project since it is not yet used in the Star Track base app template.</p
 
 <ol>
   <li>
-    <p>Open your temrinal and use the PhoneGap CLI to add it now (the <code class="highlighter-rouge">--save</code> parameter will save the plugin to your <code class="highlighter-rouge">config.xml</code> file):</p>
+    <p>Open your terminal and use the PhoneGap CLI to add it now (the <code class="highlighter-rouge">--save</code> parameter will save the plugin to your <code class="highlighter-rouge">config.xml</code> file):</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code>phonegap plugin add cordova-plugin-x-socialsharing --save
 </code></pre>
@@ -93,7 +93,7 @@ to your project since it is not yet used in the Star Track base app template.</p
 <blockquote>
   <p>Be sure to visit the <a href="https://github.com/apache/cordova-plugin-network-information">Social Sharing Plugin Docs</a> 
 to learn about any platform quirks and more things you can do with this plugin. This plugin and many other 
-great plugins were written by Eddy Verbruggen and can be found on his GitHub repo.</p>
+great plugins were written by Eddy Verbruggen and can be found on his <a href="https://github.com/EddyVerbruggen">GitHub repo</a>.</p>
 </blockquote>
 
 <h3 id="steps">Steps</h3>
@@ -106,20 +106,21 @@ In this module we’ll add event handling to this button to trigger the Social S
   <li>
     <p>Add the following code to handle when a user clicks the <em>share</em> button on the swipeout. You can add it just after the  <code class="highlighter-rouge">searchbar</code> init handling:</p>
 
-    <p>$$(page.container).find(‘.share’).on(‘click’, function (e) {
-     var item = page.context.tracks.items[this.dataset.item]</p>
+    <div class="highlighter-rouge"><pre class="highlight"><code> $$(page.container).find('.share').on('click', function (e) {
+     var item = page.context.tracks.items[this.dataset.item]
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> if (window.plugins &amp;&amp; window.plugins.socialsharing) {
-     window.plugins.socialsharing.share("Hey! I found this on Spotify. It's called " + item.name + ", check it out!",
-         'Check this out', item.album.images[2].url, item.preview_url,
-         function () {
-             console.log("Share Success")
-         },
-         function (error) {
-             console.log("Share fail " + error)
-         });
- }
- else myApp.alert("Share plugin not found");  });
+     if (window.plugins &amp;&amp; window.plugins.socialsharing) {
+         window.plugins.socialsharing.share("Hey! I found this on Spotify. It's called " + item.name + ", check it out!",
+             'Check this out', item.album.images[2].url, item.preview_url,
+             function () {
+                 console.log("Share Success")
+             },
+             function (error) {
+                 console.log("Share fail " + error)
+             });
+     }
+     else myApp.alert("Share plugin not found");
+ });
 </code></pre>
     </div>
   </li>
@@ -132,8 +133,10 @@ not supported). Remember, this is a 3rd party plugin so you can only test this f
 <p>It should look something like below when you run it on iOS:</p>
 
 <p><img class="screenshot-sm" src="images/swipeout-ios.png" />
-  <img class="screenshot-sm" src="images/share0.png" />
-  <img class="screenshot-sm" src="images/share-ios.png" /></p>
+  <img class="screenshot-sm" src="images/share0.png" /><br />
+  <img class="screenshot-sm" src="images/share-android.png" />
+  <img class="screenshot-sm" src="images/android-swipeout.png" />
+  <img class="screenshot-sm" src="images/share-android.png" /></p>
 
 <blockquote>
   <p>The options shown in the share menu will depend on your particular devices’ native sharing options.</p>
@@ -178,7 +181,7 @@ not supported). Remember, this is a 3rd party plugin so you can only test this f
             <ol class="list-group">
                 <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
                 <li><a href="lesson2.html">App Walkthru</a></li>
-                <li><a href="lesson3.html">Detecting Offline</a></li>
+                <li><a href="lesson3.html">Handling Offline</a></li>
                 <li><a href="lesson4.html">Searchbar Filter</a></li>
                 <li><a href="lesson5.html">Add Swipeout Action</a></li>
                 <li><a href="lesson6.html">Add Native Share Feature</a></li>

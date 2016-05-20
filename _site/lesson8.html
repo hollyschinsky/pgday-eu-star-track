@@ -76,7 +76,7 @@
 <h4 id="common-preferences">Common Preferences</h4>
 <ol>
   <li>
-    <p>DisallowOverscroll (iOS)</p>
+    <p><strong>DisallowOverscroll</strong> (iOS)</p>
 
     <p>By default the webview will have a bounce effect on iOS. You can see it when you try to drag down from the navigation bar, it will actually allow you to pull it down and snap back up when you stop:</p>
 
@@ -99,14 +99,14 @@ you’ll want to disable this effect in your apps. Set this property to true in 
 
 <ol>
   <li>
-    <p>iOS Backup Storage (defaults to iCloud)</p>
+    <p><strong>iOS Backup Storage</strong> (defaults to iCloud)</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code> &lt;preference name="BackupWebStorage" value="none" /&gt;
 </code></pre>
     </div>
   </li>
   <li>
-    <p>Orientation (iOS)</p>
+    <p><strong>Orientation</strong> (iOS)</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code>  &lt;preference name="Orientation" value="all" /&gt;
 </code></pre>
@@ -123,19 +123,13 @@ you’ll want to disable this effect in your apps. Set this property to true in 
 </code></pre>
         </div>
       </li>
+      <li>
+        <p><strong>android</strong></p>
+        <allow-intent href="market:*" />
+      </li>
     </ul>
   </li>
 </ol>
-
-<ul>
-  <li>
-    <p><strong>android</strong></p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code>   &lt;allow-intent href="market:*" /&gt;
-</code></pre>
-    </div>
-  </li>
-</ul>
 
 <blockquote>
   <p>All of these settings are already included in your base template project so no action is required.</p>
@@ -144,7 +138,6 @@ you’ll want to disable this effect in your apps. Set this property to true in 
 <ol>
   <li>
     <p>Content Security Policy
-#### Content Security Policy
 The CSP is used to help secure your app and mitigate injections and vulnerabilities like cross-site scripting (XSS). You can customize it to
 whitelist approved sites amongst other things. To use it you need to ensure you have the [Cordova Whitelist Plugin](https://github.com/apache/cordova-plugin-whitelist
 added to your project (already included in the base template by default) and add a meta tag to your index.html that declares the specific policy
@@ -152,23 +145,6 @@ added to your project (already included in the base template by default) and add
 
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com` `https://api.spotify.com 'unsafe-eval' 'unsafe-inline' ws://localhost:3000; 
  style-src 'self' 'unsafe-inline';` `media-src *; img-src * data:" />
-  </li>
-  <li>
-    <p>If you plan to run on the Android platform, you should also open the <code class="highlighter-rouge">config.xml</code> and add this line into the Android platform-specific section:</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;allow-navigation href="http://*/*" /&gt;
-</code></pre>
-    </div>
-
-    <p>The end result looks like:</p>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;platform name="android"&gt;
-         &lt;preference name="android-minSdkVersion" value="14" /&gt;
-         &lt;allow-intent href="market:*" /&gt;
-         &lt;allow-navigation href="http://*/*" /&gt;
- &lt;/platform&gt;
-</code></pre>
-    </div>
   </li>
 </ol>
 
@@ -178,7 +154,9 @@ added to your project (already included in the base template by default) and add
 
 <ol>
   <li>
-    <p>Icons and Splash screens</p>
+    <p>Icons and Splash screens - set up the paths for each platform with the different required attributes according. The icons
+have already been set up in the Star Track app so you can use the <code class="highlighter-rouge">config.xml</code> file for ar reference. See the
+<a href="https://cordova.apache.org/docs/en/latest/config_ref/images.html">Official Cordova guides</a> for details.</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code>    &lt;platform name="ios"&gt;
         &lt;icon height="180" src="res/icon/ios/icon-60@3x.png" width="180" /&gt;
@@ -198,7 +176,7 @@ added to your project (already included in the base template by default) and add
 </ol>
 
 <blockquote>
-  <p>These settings are already included in your base template project so no action is required.</p>
+  <p>All of the above settings are already included in the base template project so no action is required.</p>
 </blockquote>
 
 <h4 id="general-icon-support">General Icon Support</h4>
@@ -250,8 +228,9 @@ these assets will all be copied down to their respective platform locations for 
 </ol>
 
 <h3 id="plugin-dependencies">Plugin Dependencies</h3>
-<p>At this point it’s worth going over all of the plugins this project relies on. You can add them into your config.xml so you have them
-when you decide to use the CLI to build locally and outside of the PhoneGap Developer app.</p>
+<p>At this point it’s worth going over all of the plugins this project relies on. You should always ensure they have been saved to your
+ config.xml so they will be automatically installed when you decide to use the CLI to build locally and outside of the PhoneGap 
+ Developer app.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>    &lt;plugin name="cordova-plugin-statusbar" spec="~1.0.1" /&gt;
     &lt;plugin name="cordova-plugin-console" spec="~1.0.1" /&gt;
@@ -303,7 +282,7 @@ glyphicon-chevron-right"></i></a>
             <ol class="list-group">
                 <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
                 <li><a href="lesson2.html">App Walkthru</a></li>
-                <li><a href="lesson3.html">Detecting Offline</a></li>
+                <li><a href="lesson3.html">Handling Offline</a></li>
                 <li><a href="lesson4.html">Searchbar Filter</a></li>
                 <li><a href="lesson5.html">Add Swipeout Action</a></li>
                 <li><a href="lesson6.html">Add Native Share Feature</a></li>

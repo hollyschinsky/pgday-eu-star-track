@@ -71,8 +71,8 @@
         <h1>Module 4&#58; Results Filtering</h1>
         <!--<hr/>-->
         <h3 id="overview">Overview</h3>
-<p>In this step we’ll add a Framework7 Searchbar component to our results page to allow the user to search/filter the results with a matching string
-entered by the user. This search is used to filter results once received.</p>
+<p>In this step we’ll add a [Framework7 Searchbar]((http://framework7.io/docs/searchbar.html) component to our results page to allow the user to search/filter the results with a matching string
+entered by the user. This component is used to filter results <em>after</em> they are received.</p>
 
 <p>Below is the result on iOS and Android respectively:</p>
 
@@ -83,7 +83,7 @@ entered by the user. This search is used to filter results once received.</p>
 <ol>
   <li>Begin by opening your browser and reviewing the <a href="http://framework7.io/docs/searchbar.html">Framework7 documentation</a> for the <code class="highlighter-rouge">searchbar</code> component.</li>
   <li>
-    <p>Open <code class="highlighter-rouge">www/index.html</code> and locate the <code class="highlighter-rouge">results</code> template script tag:
+    <p>Open <code class="highlighter-rouge">www/index.html</code> and locate this <code class="highlighter-rouge">results</code> template script tag since we’ll be adding this new component to that page:
          <code class="highlighter-rouge">
          &lt;script type="text/template7" id="results"&gt;
         </code></p>
@@ -116,7 +116,7 @@ what to display when found and not found etc):</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code>myApp.onPageInit('results', function(page) {
     var mySearchbar = myApp.searchbar('.searchbar', {
-        searchList: '.media-list',
+        searchList: '.list-block-search',
         searchIn: '.item-content',
         found: '.searchbar-found',
         notFound: 'searchbar-not-found'
@@ -124,23 +124,26 @@ what to display when found and not found etc):</p>
 })   
 </code></pre>
     </div>
-
-    <p><strong>Parameters:</strong>
-- <code class="highlighter-rouge">searchList</code> - the class selector for the list containing the data to search
-- <code class="highlighter-rouge">searchIn</code> - set to the class selector for the content to be searched. Defaults to <code class="highlighter-rouge">.item-title</code> otherwise.
-- <code class="highlighter-rouge">found</code> - the class selector for the element or block to display with the matches found
-- <code class="highlighter-rouge">notFound</code> - the class selector for the element to display in the case where no matches were found</p>
-
-    <blockquote>
-      <p>These parameters can also be initialized inline the HTML with <code class="highlighter-rouge">data-*</code> attributes. 
-  See the <a href="http://framework7.io/docs/pages.html">Framework7 docs on Pages</a> to learn more about the events that can be handled for a page.</p>
-    </blockquote>
   </li>
+</ol>
+
+<p><strong>Parameters:</strong>
+  -<code class="highlighter-rouge">searchList</code> - the class selector for the list containing the data to search
+  -<code class="highlighter-rouge">searchIn</code> - set to the class selector for the content to be searched. Defaults to <code class="highlighter-rouge">.item-title</code> otherwise.
+  -<code class="highlighter-rouge">found</code> - the class selector for the element or block to display with the matches found
+  -<code class="highlighter-rouge">notFound</code> - the class selector for the element to display in the case where no matches were found</p>
+
+<blockquote>
+  <p>These parameters can also be initialized inline the HTML with <code class="highlighter-rouge">data-*</code> attributes. 
+  See the <a href="http://framework7.io/docs/pages.html">Framework7 docs on Pages</a> to learn more about the events that can be handled for a page.</p>
+</blockquote>
+
+<ol>
   <li>
     <p>Now go back into <code class="highlighter-rouge">www/index.html</code>  and add the <code class="highlighter-rouge">searchbar-found</code> class to the <code class="highlighter-rouge">&lt;div&gt;</code> element containing 
 the list block, since it will create a filtered list using those same elements with the matched items:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;div class="list-block media-list searchbar-found"&gt;
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;div class="list-block media-list list-block-search searchbar-found"&gt;
 </code></pre>
     </div>
   </li>
@@ -227,7 +230,7 @@ glyphicon-chevron-right"></i></a>
             <ol class="list-group">
                 <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
                 <li><a href="lesson2.html">App Walkthru</a></li>
-                <li><a href="lesson3.html">Detecting Offline</a></li>
+                <li><a href="lesson3.html">Handling Offline</a></li>
                 <li><a href="lesson4.html">Searchbar Filter</a></li>
                 <li><a href="lesson5.html">Add Swipeout Action</a></li>
                 <li><a href="lesson6.html">Add Native Share Feature</a></li>

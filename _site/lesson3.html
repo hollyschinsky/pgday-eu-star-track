@@ -68,7 +68,7 @@
 <div class="row">
 
     <div class="col-xs-12 col-sm-8">
-        <h1>Module 3&#58; Handling Network Status Change</h1>
+        <h1>Module 3&#58; Handling Offline</h1>
         <!--<hr/>-->
         <h2 id="overview">Overview</h2>
 <p>When building for mobile you should always take an offline-first approach. There will be times when the 
@@ -88,7 +88,7 @@ connection goes from online to offline and vice versa and take action then accor
 notification to the user.</p>
 
 <h2 id="requirements">Requirements</h2>
-<p>Before you can code this feature, you’ll first need to add the Cordova Network Information Plugin to your project since it is not yet used in the Star Track base
+<p>Before you can code this feature, you’ll first need to add the <a href="https://github.com/apache/cordova-plugin-network-information">Cordova Network Information Plugin</a> to your project since it is not yet used in the Star Track base
 app template.</p>
 
 <ol>
@@ -109,27 +109,30 @@ app template.</p>
 <h2 id="steps">Steps</h2>
 <ol>
   <li>Open <code class="highlighter-rouge">www/index.html</code> and add a wifi icon to the <code class="highlighter-rouge">index</code> page <code class="highlighter-rouge">navbar</code> on the right side to indicate 
-the current connection status. Font Awesome is already included in the project and has an icon you can use
+the current connection status. <a href="http://fontawesome.io/icons/">Font Awesome</a> is already included in the project and has an icon you can use
 with the name <code class="highlighter-rouge">fa-wifi</code>.</li>
 </ol>
 
-<p>Insert the new code snippet for the icon directly after this line for the index page (denoted by <code class="highlighter-rouge">data-page="index"</code>). The result will look like this below:</p>
+<p>First locate the <code class="highlighter-rouge">navbar</code> defined for the <code class="highlighter-rouge">index</code> page in the <code class="highlighter-rouge">www/index.html' file. You can search for </code>navbar<code class="highlighter-rouge"> and find the one
+  with the attribute </code>data-page=”index”`. Add the right side definition as shown in the snippet below. (The whole navbar definition is
+  included for easier reference).</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code> &lt;div class="navbar"&gt;
   &lt;div class="navbar-inner" data-page="index"&gt;
     &lt;div class="left"&gt;
-    &lt;!--
-        Left link contains only icon - additional "icon-only" class
-        Additional "open-panel" class tells app to open panel when we click on this link
-    --&gt;
-    &lt;a href="#" class="link icon-only open-panel"&gt;&lt;i class="fa fa-bars"&gt;&lt;/i&gt;&lt;/a&gt;
+        &lt;!--
+            Left link contains only icon - additional "icon-only" class
+            Additional "open-panel" class tells app to open panel when we click on this link
+        --&gt;
+        &lt;a href="#" class="link icon-only open-panel"&gt;&lt;i class="fa fa-bars"&gt;&lt;/i&gt;&lt;/a&gt;
     &lt;/div&gt;
     &lt;div class="center sliding"&gt;Search&lt;/div&gt;
+    &lt;!-- Workshop - Add right navbar icon --&gt;
     &lt;div class="right"&gt;
-    &lt;!--
-        Right icon indicates network connection               
-    --&gt;
-    &lt;a href="#" class="icon-only"&gt;&lt;i class="fa fa-wifi"&gt;&lt;/i&gt;&lt;/a&gt;
+        &lt;!--
+            Right icon indicates network connection status               
+        --&gt;
+        &lt;a href="#" class="icon-only"&gt;&lt;i class="fa fa-wifi"&gt;&lt;/i&gt;&lt;/a&gt;
     &lt;/div&gt;
   &lt;/div&gt;
  &lt;/div&gt;    
@@ -141,22 +144,26 @@ with the name <code class="highlighter-rouge">fa-wifi</code>.</li>
 
 <blockquote>
   <p>Note that due to platform styling differences, we’re using different colors between the platforms to indicate
-   online and offline.</p>
+   online and offline (green/gray on iOS, white,gray on Android).</p>
 </blockquote>
 
 <p><img class="screenshot-md2" src="images/ios-online-icon.png" />
-   <img class="screenshot-md2" src="images/ios-offline-icon.png" /></p>
+   <img class="screenshot-md2" src="images/ios-offline-icon.png" />
+   <img class="screenshot-md2" src="images/android-online.png" />
+   <img class="screenshot-md2" src="images/android-offline.png" /></p>
 
 <ol>
   <li>
-    <p>Now open the <code class="highlighter-rouge">www/js/my-app.js</code> file and add the following variable declaration to the top of the file under the <code class="highlighter-rouge">isIOS</code>
+    <p>Now open the <code class="highlighter-rouge">www/js/my-app.js</code> file and add the following variable declaration to the top of the file under the <code class="highlighter-rouge">isIos</code>
 and <code class="highlighter-rouge">isMaterial</code> handling. This will keep the current network status in case we need to check it in other parts of the code.
 We’ll begin by assuming it’s offline until the next step can determine it for sure.</p>
 
-    <p>var offline = true;</p>
+    <div class="highlighter-rouge"><pre class="highlight"><code>var offline = true;
+</code></pre>
+    </div>
   </li>
   <li>
-    <p>Next open the <code class="highlighter-rouge">www/js/my-app.js</code> file and add the following code to the <code class="highlighter-rouge">deviceready()</code> function.</p>
+    <p>While still in the <code class="highlighter-rouge">www/js/my-app.js</code> file, add the following code to the <code class="highlighter-rouge">deviceready()</code> function.</p>
 
     <p>This code checks to ensure the plugin is available and then checks if the current 
  connection is none, indicating it would be offline. In this case it will set the color to gray on both
@@ -183,24 +190,26 @@ We’ll begin by assuming it’s offline until the next step can determine it fo
     </blockquote>
   </li>
   <li>
-    <p>Next we’ll add the functions for the onOffline and onOnline handlers. They both will display
-a toast notification to indicate the status change and set the colors of the wifi icon on the main
+    <p>Next we’ll add the functions for the <code class="highlighter-rouge">onOffline</code> and <code class="highlighter-rouge">onOnline</code> handlers. They will both display
+a toast style notification to indicate the status change and set the colors of the wifi icon on the main
 page for visual notification. (See the <a href="http://framework7.io/docs/notifications.html">Framework7 notification docs</a> 
 for more details on using these toast style notifications in your apps).</p>
 
     <ul>
       <li>
-        <p>Add the function for the <code class="highlighter-rouge">onOffline</code> handler:</p>
+        <p>Add the function for the <code class="highlighter-rouge">onOffline</code> handler just below the <code class="highlighter-rouge">deviceready</code> function:</p>
 
-        <p>function onOffline() {
-      offline = true;
-      myApp.addNotification({
-           title: ‘Connection Status’,
-           message: ‘A previously connected device has gone offline.’
-      });
-      if (isIos) <script type="math/tex">('.fa-wifi').removeClass('color-green').addClass('color-gray');
-      else</script>(‘.fa-wifi’).removeClass(‘color-white’).addClass(‘color-gray’);          <br />
-   }</p>
+        <div class="highlighter-rouge"><pre class="highlight"><code>   function onOffline() {
+       offline = true;
+       myApp.addNotification({
+          title: 'Connection Status',
+          message: 'A previously connected device has gone offline.'
+       });
+       if (isIos) $$('.fa-wifi').removeClass('color-green').addClass('color-gray');
+          else $$('.fa-wifi').removeClass('color-white').addClass('color-gray');            
+   }
+</code></pre>
+        </div>
       </li>
     </ul>
   </li>
@@ -208,19 +217,19 @@ for more details on using these toast style notifications in your apps).</p>
 
 <ul>
   <li>
-    <p>Add the function for the <code class="highlighter-rouge">onOnline</code> handler:</p>
+    <p>Add the function for the <code class="highlighter-rouge">onOnline</code> handler just below the above:</p>
 
-    <div class="highlighter-rouge"><pre class="highlight"><code>function onOnline() {
-    // Show a toast notification to indicate the change
-    myApp.addNotification({
-        title: 'Connection Status',
-        message: 'A previously connected device has come back online'
-    });
-    // Set the wifi icon colors to reflect the change
-    if (isIos) $$('.fa-wifi').removeClass('color-gray').addClass('color-green');
-    else $$('.fa-wifi').removeClass('color-gray').addClass('color-white');    
-    offline = false;
-}
+    <div class="highlighter-rouge"><pre class="highlight"><code>    function onOnline() {
+        // Show a toast notification to indicate the change
+        myApp.addNotification({
+            title: 'Connection Status',
+            message: 'A previously connected device has come back online'
+        });
+        // Set the wifi icon colors to reflect the change
+        if (isIos) $$('.fa-wifi').removeClass('color-gray').addClass('color-green');
+        else $$('.fa-wifi').removeClass('color-gray').addClass('color-white');    
+        offline = false;
+    }
 </code></pre>
     </div>
   </li>
@@ -231,6 +240,9 @@ for more details on using these toast style notifications in your apps).</p>
 online.</p>
 
 <p><img class="screenshot2" src="images/ios-network-detect.png" /></p>
+
+<h2 id="extra-credit">Extra Credit</h2>
+<p>Requiring users to have to close the notifications is less than ideal. Instead, set a timeout and close them programmatically.</p>
 
 <blockquote>
   <p>At this point you could further handle the experience as desired. You may want to store some data in local storage
@@ -279,7 +291,7 @@ glyphicon-chevron-right"></i></a>
             <ol class="list-group">
                 <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
                 <li><a href="lesson2.html">App Walkthru</a></li>
-                <li><a href="lesson3.html">Detecting Offline</a></li>
+                <li><a href="lesson3.html">Handling Offline</a></li>
                 <li><a href="lesson4.html">Searchbar Filter</a></li>
                 <li><a href="lesson5.html">Add Swipeout Action</a></li>
                 <li><a href="lesson6.html">Add Native Share Feature</a></li>

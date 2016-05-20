@@ -112,20 +112,42 @@ file. For instance, you could choose purple if you’re running with the materia
 </code></pre>
 </div>
 
-<p>For this workshop, let’s set it to a combination of the following:</p>
+<p>For this workshop, let’s set it to a combination of the following to match the Spotify theme:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>&lt;body class="layout-dark theme-green"&gt;
 </code></pre>
 </div>
 
-<p>There’s one more change to make before moving on here due to the change for the dark theme. We need to modify the search
-input field to change the <code class="highlighter-rouge">type="search"</code> to <code class="highlighter-rouge">type="text"</code> to ensure the text content is displayed in white with this new
-color scheme. Locate the following <code class="highlighter-rouge">&lt;input&gt;</code> element and change the type to <code class="highlighter-rouge">text</code> as shown:</p>
+<p>There are a couple more minor changes to make before moving on here due to the change for the dark theme. We need to modify the 
+<code class="highlighter-rouge">www/css/styles.css</code> file to remove the background color specificlly set for iOS panel so the dark theme applies.
+<strong>Remove</strong> the following style setting:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;div class="item-input"&gt;
-    &lt;input name="q" type="text" placeholder="track, artist or album"
-    autocorrect="off" autocapitalize="off"&gt;
-&lt;/div&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>.ios .panel {
+  background-color: #ffffff;
+}
+</code></pre>
+</div>
+
+<p>We’ll also want to update the <code class="highlighter-rouge">statusbar-overlay</code> settings to use a dark background and white font for iOS. While in the <code class="highlighter-rouge">styles.css</code> file, 
+comment out the current <code class="highlighter-rouge">statusbar-overlay</code> background settings and set it to black instead as shown below:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/* Use for light background apps */
+/*.statusbar-overlay {
+/*  background: rgb(247, 247, 248);*/
+}*/
+
+/* Use for dark background apps */
+.statusbar-overlay {
+  background: rgb(0, 0, 0);
+}
+</code></pre>
+</div>
+
+<p>Lastly we’ll need to open the <code class="highlighter-rouge">config.xml</code> file and comment out the <code class="highlighter-rouge">StatusBarStyle</code> preference since it’s currently set for
+to default which will use black font.  When the statusbar plugin is added it will be set to 
+<code class="highlighter-rouge">lightcontent</code> by default which is white text and what we want in this case. Comment this out as shown below.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;!--&lt;preference name="StatusBarStyle" value="default" /&gt;--&gt; 
 </code></pre>
 </div>
 
@@ -326,7 +348,7 @@ glyphicon-chevron-right"></i></a>
             <ol class="list-group">
                 <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
                 <li><a href="lesson2.html">App Walkthru</a></li>
-                <li><a href="lesson3.html">Detecting Offline</a></li>
+                <li><a href="lesson3.html">Handling Offline</a></li>
                 <li><a href="lesson4.html">Searchbar Filter</a></li>
                 <li><a href="lesson5.html">Add Swipeout Action</a></li>
                 <li><a href="lesson6.html">Add Native Share Feature</a></li>

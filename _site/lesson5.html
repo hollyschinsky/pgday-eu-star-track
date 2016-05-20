@@ -84,24 +84,48 @@ allow you to swipe left or right over list elements to reveal further actions.</
     <p>Take a moment to review the <a href="http://framework7.io/docs/swipeout.html">Framework7 Swipeout Docs</a></p>
   </li>
   <li>
-    <p>Open <code class="highlighter-rouge">index.html</code> and add the <code class="highlighter-rouge">swipeout</code> class to the current <code class="highlighter-rouge">&lt;li&gt;</code> tag:</p>
+    <p>Open <code class="highlighter-rouge">index.html</code>, locate the <code class="highlighter-rouge">results</code> template and within the list, add the <code class="highlighter-rouge">swipeout</code> class to the existing <code class="highlighter-rouge">&lt;li&gt;</code> tag
+such as:</p>
 
-    <li class="swipeout">
-
-</li>
+    <p><code class="highlighter-rouge">&lt;li class="swipeout"&gt;</code></p>
   </li>
   <li>
-    <p>Now add a new <code class="highlighter-rouge">&lt;div&gt;</code> element with the class of <code class="highlighter-rouge">swipeout-content</code> just below it the <code class="highlighter-rouge">&lt;li&gt;</code>
-and end it after the &lt;<code class="highlighter-rouge">li</code>&gt;</p>
+    <p>Now add a new <code class="highlighter-rouge">&lt;div&gt;</code> element with the class of <code class="highlighter-rouge">swipeout-content</code> just below the <code class="highlighter-rouge">&lt;li&gt;</code>
+and ending <code class="highlighter-rouge">&lt;/div&gt;</code> just before the &lt;<code class="highlighter-rouge">/li</code>&gt;</p>
 
-    <div class="swipeout-content">
-
-</div>
+    <div class="highlighter-rouge"><pre class="highlight"><code> &lt;div class="swipeout-content"&gt;
+ &lt;ul&gt;
+     {{#each tracks.items}}
+     &lt;!-- Workshop - add swipeout--&gt;
+     &lt;li class="swipeout"&gt;
+     &lt;div class="swipeout-content"&gt;
+         &lt;a href="#" class="item-link item-content"
+         data-item="{{@index}}"
+         data-context="{{stringify this}}"
+         data-template="details"&gt;
+         &lt;div class="item-media"&gt;
+             &lt;img width="80" src="{{this.album.images[0].url}}"&gt;
+         &lt;/div&gt;
+         &lt;div class="item-inner"&gt;
+             &lt;div class="item-title-row"&gt;
+             &lt;div class="item-title"&gt;{{this.name}}&lt;/div&gt;
+             &lt;div class="item-after"&gt;{{durationFromMs this.duration_ms}}&lt;/div&gt;
+             &lt;/div&gt;
+             &lt;div class="item-subtitle"&gt;{{this.artists[0].name}}&lt;/div&gt;
+             &lt;div class="item-text"&gt;{{this.album.name}}&lt;/div&gt;
+         &lt;/div&gt;
+         &lt;/a&gt;
+     &lt;/div&gt;
+     &lt;/li&gt;
+     {{/each}}
+ &lt;/ul&gt;
+</code></pre>
+    </div>
   </li>
   <li>
-    <p>Add the following snippet just before the closing <code class="highlighter-rouge">&lt;\li&gt;</code>. This code will create the action itself
-with a link containing a <code class="highlighter-rouge">share</code> class that we’ll list to for clicks and pass along the index of the
-item clicked. It also sets the share icon based on the platform.</p>
+    <p>Add the following snippet just before the closing <code class="highlighter-rouge">&lt;/li&gt;</code>. This code will create the action itself
+with a link containing a <code class="highlighter-rouge">share</code> class that we’ll listen to for clicks(taps) and pass along the index of the
+item clicked. It also sets a different share icon based on the platform.</p>
 
     <div class="highlighter-rouge"><pre class="highlight"><code>         &lt;!-- Swipeout actions right --&gt;                
          &lt;div class="swipeout-actions-right"&gt;
@@ -124,7 +148,8 @@ that will be added in the next lesson.</p>
   <li>
     <p>Run your app to ensure you see the new swipeout action on the right side when you swipe on a list item.</p>
 
-    <p><img class="screenshot-lg-center" src="images/ios-swipeout.png" /></p>
+    <p><img class="screenshot-md2" src="images/ios-swipeout.png" />
+ <img class="screenshot-md2" src="images/android-swipeout.png" /></p>
 
     <blockquote>
       <p>IMPORTANT: Based on the Framework7 docs, the swipeout support will not work well in the browser so you should test this feature via the PhoneGap Developer App or the CLI locally.</p>
@@ -172,7 +197,7 @@ glyphicon-chevron-right"></i></a>
             <ol class="list-group">
                 <li><a href="lesson1.html">Project Setup/PhoneGap Tooling</a></li>
                 <li><a href="lesson2.html">App Walkthru</a></li>
-                <li><a href="lesson3.html">Detecting Offline</a></li>
+                <li><a href="lesson3.html">Handling Offline</a></li>
                 <li><a href="lesson4.html">Searchbar Filter</a></li>
                 <li><a href="lesson5.html">Add Swipeout Action</a></li>
                 <li><a href="lesson6.html">Add Native Share Feature</a></li>
