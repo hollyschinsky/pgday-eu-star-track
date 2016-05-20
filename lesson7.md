@@ -7,10 +7,8 @@ title: Module 7&#58; Making Your App Feel Native
 In this module we're going to discuss ways to make your app feel and act native. Many of the tips included here are built into Framework7 so you
 will not need to implement them in this particular app but it's important to be aware of them when building hybrid apps.
 
->All of the tips in the above list are already built into Framework7 but important to understand when building hybrid apps.
-
 1. **Remove tap highlight**
-    Remove the highlight effect when tapping on a link if you're not handling it properly:
+    - Remove the highlight effect when tapping on a link if you're not handling it properly:
 
     <img class="screenshot-md" src="images/webkit-tap-highlight.png"/>
         
@@ -71,6 +69,7 @@ will not need to implement them in this particular app but it's important to be 
   
 5. **Manage Click Delay** - ensure you're using [FastClick](https://github.com/ftlabs/fastclick) or something similar to handle tap delay on mobile.
 
+>All of the tips in the above list are already built into Framework7 but important to understand when building hybrid apps.
 
 ## Optional
 If you're running an app through the CLI on a native simulator or device (outside of PhoneGap Developer), you can test out some of these CSS tricks
