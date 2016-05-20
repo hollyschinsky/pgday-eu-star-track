@@ -94,7 +94,8 @@ function onOffline() {
     offline = true;
     myApp.addNotification({
        title: 'Connection Status',
-       message: 'A previously connected device has gone offline.'
+       message: 'A previously connected device has gone offline.',
+       hold: 2000
     });
     if (isIos) $$('.fa-wifi').removeClass('color-green').addClass('color-gray');
        else $$('.fa-wifi').removeClass('color-white').addClass('color-gray');
@@ -104,7 +105,8 @@ function onOnline() {
     // Show a toast notification to indicate the change
     myApp.addNotification({
         title: 'Connection Status',
-        message: 'A previously connected device has come back online'
+        message: 'A previously connected device has come back online',
+        hold: 2000
     });
     // Set the wifi icon colors to reflect the change
     if (isIos) $$('.fa-wifi').removeClass('color-gray').addClass('color-green');
