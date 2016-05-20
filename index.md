@@ -74,7 +74,7 @@ into any problems or if you have feedback.
 
 
 ## Slides
-[Presentation Slides](preso/index.html)
+[Presentation Slides](https://github.com/hollyschinsky/pgday-eu-star-track/blob/gh-pages/preso/www/index.html)
 
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
