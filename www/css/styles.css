@@ -70,10 +70,6 @@ body {
   background-image: none;
 }
 
-.ios .panel {
-  background-color: #ffffff;
-}
-
 .ios.with-panel-left-cover .panel-overlay {
   opacity: 1;
   background: rgba(0,0,0,0.2);

@@ -54,6 +54,7 @@ not supported). Remember, this is a 3rd party plugin so you can only test this f
   <img class="screenshot-sm" src="images/swipeout-ios.png"/>
   <img class="screenshot-sm" src="images/share0.png"/>
   <img class="screenshot-sm" src="images/share-ios.png"/>
+  <img class="screenshot-sm" src="images/share-android.png"/>
   
   >The options shown in the share menu will depend on your particular devices' native sharing options.
 

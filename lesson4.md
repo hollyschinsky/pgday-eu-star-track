@@ -4,8 +4,8 @@ title: Module 4&#58; Results Filtering
 ---
 
 ### Overview
-In this step we'll add a Framework7 Searchbar component to our results page to allow the user to search/filter the results with a matching string
-entered by the user. This search is used to filter results once received. 
+In this step we'll add a [Framework7 Searchbar]((http://framework7.io/docs/searchbar.html) component to our results page to allow the user to search/filter the results with a matching string
+entered by the user. This component is used to filter results *after* they are received. 
 
 Below is the result on iOS and Android respectively:
 

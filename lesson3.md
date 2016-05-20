@@ -1,6 +1,6 @@
 ---
 layout: module
-title: Module 3&#58; Handling Network Status Change
+title: Module 3&#58; Handling Offline
 ---
 
 ## Overview
@@ -22,7 +22,7 @@ In this lesson you will learn how to use this plugin to detect and listen for ne
 notification to the user. 
 
 ## Requirements
-Before you can code this feature, you'll first need to add the Cordova Network Information Plugin to your project since it is not yet used in the Star Track base
+Before you can code this feature, you'll first need to add the [Cordova Network Information Plugin](https://github.com/apache/cordova-plugin-network-information) to your project since it is not yet used in the Star Track base
 app template. 
 
 1. Open your terminal and use the PhoneGap CLI to add it now (the `--save` parameter will save the plugin to your `config.xml` file): 
@@ -34,26 +34,29 @@ app template.
 
 ## Steps
 1. Open `www/index.html` and add a wifi icon to the `index` page `navbar` on the right side to indicate 
-the current connection status. Font Awesome is already included in the project and has an icon you can use
+the current connection status. [Font Awesome](http://fontawesome.io/icons/) is already included in the project and has an icon you can use
 with the name `fa-wifi`.
 
-  Insert the new code snippet for the icon directly after this line for the index page (denoted by `data-page="index"`). The result will look like this below: 
+  First locate the `navbar` defined for the `index` page in the `www/index.html' file. You can search for `navbar` and find the one
+  with the attribute `data-page="index"`. Add the right side definition as shown in the snippet below. (The whole navbar definition is
+  included for easier reference).  
    
      <div class="navbar">
       <div class="navbar-inner" data-page="index">
         <div class="left">
-        <!--
-            Left link contains only icon - additional "icon-only" class
-            Additional "open-panel" class tells app to open panel when we click on this link
-        -->
-        <a href="#" class="link icon-only open-panel"><i class="fa fa-bars"></i></a>
+            <!--
+                Left link contains only icon - additional "icon-only" class
+                Additional "open-panel" class tells app to open panel when we click on this link
+            -->
+            <a href="#" class="link icon-only open-panel"><i class="fa fa-bars"></i></a>
         </div>
         <div class="center sliding">Search</div>
+        <!-- Workshop - Add right navbar icon -->
         <div class="right">
-        <!--
-            Right icon indicates network connection               
-        -->
-        <a href="#" class="icon-only"><i class="fa fa-wifi"></i></a>
+            <!--
+                Right icon indicates network connection status               
+            -->
+            <a href="#" class="icon-only"><i class="fa fa-wifi"></i></a>
         </div>
       </div>
      </div>    
@@ -63,18 +66,21 @@ with the name `fa-wifi`.
    indicate online/offline status. 
 
    >Note that due to platform styling differences, we're using different colors between the platforms to indicate
-   online and offline.       
+   online and offline (green/gray on iOS, white,gray on Android).       
 
    <img class="screenshot-md2" src="images/ios-online-icon.png"/>
    <img class="screenshot-md2" src="images/ios-offline-icon.png"/>
+   <img class="screenshot-md2" src="images/android-online.png"/>
+   <img class="screenshot-md2" src="images/android-offline.png"/>
+   
   
-1. Now open the `www/js/my-app.js` file and add the following variable declaration to the top of the file under the `isIOS`
+1. Now open the `www/js/my-app.js` file and add the following variable declaration to the top of the file under the `isIos`
 and `isMaterial` handling. This will keep the current network status in case we need to check it in other parts of the code.
 We'll begin by assuming it's offline until the next step can determine it for sure. 
 
-      var offline = true;
+       var offline = true;
 
-1. Next open the `www/js/my-app.js` file and add the following code to the `deviceready()` function.
+1. While still in the `www/js/my-app.js` file, add the following code to the `deviceready()` function.
 
     This code checks to ensure the plugin is available and then checks if the current 
     connection is none, indicating it would be offline. In this case it will set the color to gray on both
@@ -98,36 +104,36 @@ We'll begin by assuming it's offline until the next step can determine it for su
     >You should always ensure you wait until the `deviceready` event is fired before using any Cordova 
     native plugins.   
 
-3. Next we'll add the functions for the onOffline and onOnline handlers. They both will display
-a toast notification to indicate the status change and set the colors of the wifi icon on the main
+3. Next we'll add the functions for the `onOffline` and `onOnline` handlers. They will both display
+a toast style notification to indicate the status change and set the colors of the wifi icon on the main
 page for visual notification. (See the [Framework7 notification docs](http://framework7.io/docs/notifications.html) 
 for more details on using these toast style notifications in your apps).    
 
-   - Add the function for the `onOffline` handler:     
+   - Add the function for the `onOffline` handler just below the `deviceready` function:     
    
-        function onOffline() {
-           offline = true;
-           myApp.addNotification({
-                title: 'Connection Status',
-                message: 'A previously connected device has gone offline.'
-           });
-           if (isIos) $$('.fa-wifi').removeClass('color-green').addClass('color-gray');
-           else $$('.fa-wifi').removeClass('color-white').addClass('color-gray');            
-        }
+            function onOffline() {
+                offline = true;
+                myApp.addNotification({
+                   title: 'Connection Status',
+                   message: 'A previously connected device has gone offline.'
+                });
+                if (isIos) $$('.fa-wifi').removeClass('color-green').addClass('color-gray');
+                   else $$('.fa-wifi').removeClass('color-white').addClass('color-gray');            
+            }
 
-  - Add the function for the `onOnline` handler:
+  - Add the function for the `onOnline` handler just below the above:
 
-        function onOnline() {
-            // Show a toast notification to indicate the change
-            myApp.addNotification({
-                title: 'Connection Status',
-                message: 'A previously connected device has come back online'
-            });
-            // Set the wifi icon colors to reflect the change
-            if (isIos) $$('.fa-wifi').removeClass('color-gray').addClass('color-green');
-            else $$('.fa-wifi').removeClass('color-gray').addClass('color-white');    
-            offline = false;
-        }
+            function onOnline() {
+                // Show a toast notification to indicate the change
+                myApp.addNotification({
+                    title: 'Connection Status',
+                    message: 'A previously connected device has come back online'
+                });
+                // Set the wifi icon colors to reflect the change
+                if (isIos) $$('.fa-wifi').removeClass('color-gray').addClass('color-green');
+                else $$('.fa-wifi').removeClass('color-gray').addClass('color-white');    
+                offline = false;
+            }
     
 ## Run it
 The end result should look like the following where you see a notification displayed when you go offline and
@@ -135,6 +141,8 @@ online.
 
    <img class="screenshot2" src="images/ios-network-detect.png"/>
   
+## Extra Credit
+Requiring users to have to close the notifications is less than ideal. Instead, set a timeout and close them programmatically.
   
 >At this point you could further handle the experience as desired. You may want to store some data in local storage
 or another on-device database to allow them to use the app with the cached data. Your app may also have data

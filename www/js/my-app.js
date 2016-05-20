@@ -351,6 +351,7 @@ myApp.onPageInit('results', function(page) {
         notFound: 'searchbar-not-found' 
         
     })
+    
     // Click handler for share action on swipeout 
     // uses current data item stored via data-item attribute 
     $$(page.container).find('.share').on('click', function (e) {

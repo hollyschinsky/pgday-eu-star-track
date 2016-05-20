@@ -39,19 +39,37 @@ Alternatively, two layout themes (white and dark) are also supported and affect 
 
     <body class="layout-dark">
 
-For this workshop, let's set it to a combination of the following:
+For this workshop, let's set it to a combination of the following to match the Spotify theme:
 
     <body class="layout-dark theme-green">
 
-There's one more change to make before moving on here due to the change for the dark theme. We need to modify the search
-input field to change the `type="search"` to `type="text"` to ensure the text content is displayed in white with this new
-color scheme. Locate the following `<input>` element and change the type to `text` as shown:
+There are a couple more minor changes to make before moving on here due to the change for the dark theme. We need to modify the 
+`www/css/styles.css` file to remove the background color specificlly set for iOS panel so the dark theme applies.
+**Remove** the following style setting:
 
-    <div class="item-input">
-        <input name="q" type="text" placeholder="track, artist or album"
-        autocorrect="off" autocapitalize="off">
-    </div>
+    .ios .panel {
+      background-color: #ffffff;
+    }
+ 
+We'll also want to update the `statusbar-overlay` settings to use a dark background and white font for iOS. While in the `styles.css` file, 
+comment out the current `statusbar-overlay` background settings and set it to black instead as shown below:
 
+    /* Use for light background apps */
+    /*.statusbar-overlay {
+    /*  background: rgb(247, 247, 248);*/
+    }*/
+
+    /* Use for dark background apps */
+    .statusbar-overlay {
+      background: rgb(0, 0, 0);
+    }
+
+Lastly we'll need to open the `config.xml` file and comment out the `StatusBarStyle` preference since it's currently set for
+to default which will use black font.  When the statusbar plugin is added it will be set to 
+`lightcontent` by default which is white text and what we want in this case. Comment this out as shown below. 
+
+    <!--<preference name="StatusBarStyle" value="default" />--> 
+    
 >The color themes will be applied a bit differently between platforms. You could also apply specific themes to sub-elements within the body as well, like page, view, navbar, list-block etc. Refer to [the docs](http://framework7.io/docs/color-themes.html) for more details on other classes that can be used to change the background color, font color and border color in their utility classes 
 as well.      
 
