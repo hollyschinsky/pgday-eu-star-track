@@ -73,6 +73,9 @@ into any problems or if you have feedback.
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 
+## Slides
+[Presentation Slides](preso/index.html)
+
 <div class="row" style="margin-top:40px;">
 <div class="col-sm-12">
 <a href="lesson1.html" class="btn btn-default pull-right">Next <i class="glyphicon
