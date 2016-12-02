@@ -1,0 +1,21 @@
+{
+  "name": "pgday-eu-star-track",
+  "version": "1.0.0",
+  "description": "> A Hello World template built with PhoneGap",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hollyschinsky/pgday-eu-star-track"
+  },
+  "author": "PhoneGap Team",
+  "license": "Apache-2.0",
+  "keywords": [
+    "ecosystem:phonegap",
+    "ecosystem:cordova",
+    "cordova:template",
+    "phonegap:template"
+  ],
+  "bugs": {
+    "url": "https://github.com/hollyschinsky/pgday-eu-star-track/issues"
+  },
+  "homepage": "https://github.com/hollyschinsky/pgday-eu-star-track"
+}
